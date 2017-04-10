@@ -1,3 +1,5 @@
+Tested with a 2012/2013 Volkswagen Polo R6
+
 ## Transfer speed (ssp444-vw-polo-2010.pdf/SPP_238.pdf)
 CAN bus drive:                       500 kbit/s
 CAN bus diagnosis:                   500 kbit/s
