@@ -1,0 +1,55 @@
+Raspberry Pi
+------------
+
+cat << EOF > spi-bcm2835-overlay.dts
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2835", "brcm,bcm2836", "brcm,bcm2708", "brcm,bcm2709";
+	/* setting up compatiblity to allow loading the spi-bcm2835 driver */
+	fragment@0 {
+		target = <&spi0>;
+		__overlay__ {
+			status = "okay";
+			compatible = "brcm,bcm2835-spi";
+		};
+	};
+};
+EOF
+
+dtc -@ -I dts -O dtb -o spi-mcp2835-overlay.dtbo spi-bcm2835-overlay.dts
+cp spi-bcm2835-overlay.dtbo /boot/overlays
+
+/boot/config.txt:
+dtparam=spi=on
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+dtoverlay=spi-bcm2835-overlay
+
+/etc/network/interfaces:
+#iface eth0 inet manual
+auto eth0
+iface eth0 inet static
+address 10.1.1.42/24
+netmask 255.255.255.0
+gateway 10.1.1.100
+dns-nameservers 8.8.8.8 8.8.4.4
+
+reboot
+
+ip link set can0 up type can bitrate 500000
+
+
+Laptop
+------
+
+/etc/sysctl.d/30-ipforward.conf:
+net.ipv4.ip_forward=1
+net.ipv6.conf.default.forwarding=1
+net.ipv6.conf.all.forwarding=1
+
+# ip link set up dev net0
+# ip addr add 10.1.1.100/24 dev net0
+iptables -t nat -A POSTROUTING -o internet0 -j MASQUERADE
+iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i net0 -o internet0 -j ACCEPT
