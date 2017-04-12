@@ -1,0 +1,12 @@
+## Wolkswagen Polo R6
+
+> ssp444-vw-polo-2010.pdf
+> SPP_238.pdf
+
+### Transfer speed
+CAN bus drive:                       500 kbit/s
+CAN bus diagnosis:                   500 kbit/s
+CAN bus led lights:                  500 kbit/s
+CAN bus system Comfort/Infotainment: 100 kbit/s
+LIN bus:                             19.2 kbit/s
+
