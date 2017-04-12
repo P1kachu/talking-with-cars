@@ -56,6 +56,9 @@ Different configuration possible, but we are interested in this one:
 
 ### ISO-TP and TP 2.0
 
+Pure CAN cannot satisfy the requirements that have to be fulfilled within
+large, extendable, interconnected networks from different manufacturers.
+Higher Layer Protocols (HLP) enables the interconnection of these networks.
 CAN allows for data packets with a payload of up to 8 bytes, to send messages
 longer than 8 bytes it is necessary to use a transport protocol. The OBD-II
 specification for example makes use of ISO-TP (ISO 15765-2). Volkswagen however
