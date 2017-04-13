@@ -40,3 +40,7 @@ print("OBD Standard: {0}".format(answer.data[2]))
 # Vehicle speed
 answer = send_and_wait(bus, 0x7df, [2, 1, 0xd, 0, 0, 0, 0, 0], False)
 print("{0} km/h".format(answer.data[3]))
+
+# Throttle position
+answer = send_and_wait(bus, 0x7df, [2, 1, 0x11, 0, 0, 0, 0, 0], False)
+print("Throttle position: {0}%".format(answer.data[3]))
