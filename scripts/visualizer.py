@@ -8,7 +8,8 @@ y_pad = 2
 x_pad = 2
 #max_rpm = 8000
 max_rpm = 4000
-max_speed = 255
+#max_speed = 255
+max_speed = 130
 
 def can_xchg(bus, arb_id, data, ext=False):
     msg = can.Message(arbitration_id=arb_id,
@@ -112,7 +113,7 @@ if __name__ in "__main__":
 
             rpm_string = "RPM:  {0}".format(str(rpm).rjust(4))
             speed_string = "Speed: {0} km/h".format(str(speed).rjust(3))
-        
+
             if tmp_inc % 20 == 0:
                 engine_coolant = get_coolant_temp(bus)
                 coolant_string = "Engine coolant temperature: {0}ºC".format(str(engine_coolant).rjust(2))
