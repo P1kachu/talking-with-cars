@@ -2,12 +2,13 @@
 
 import curses
 import can
+import datetime
 
-nb_elts = 10
+nb_elts = 8
 y_pad = 2
 x_pad = 2
 #max_rpm = 8000
-max_rpm = 4000
+max_rpm = 6000
 #max_speed = 255
 max_speed = 130
 
@@ -29,6 +30,19 @@ def get_rpm(bus):
 def get_speed(bus):
     answer = can_xchg(bus, 0x7df, [2, 1, 0xd, 0, 0, 0, 0, 0])
     return answer.data[3]
+
+def get_throttle_pos(bus):
+    answer = can_xchg(bus, 0x7df, [2, 1, 0x11, 0, 0, 0, 0, 0])
+    return int(100 * answer.data[3] / 255)
+
+def get_accel_pos(bus):
+    #0x49 0x4a 0x4b
+    answer = can_xchg(bus, 0x7df, [2, 1, 0x49, 0, 0, 0, 0, 0])
+    return int(100 * answer.data[3] / 255)
+
+def get_elapsed_time(bus):
+    answer = can_xchg(bus, 0x7df, [2, 1, 0x1f, 0, 0, 0, 0, 0])
+    return int(256 * answer.data[3] + answer.data[4])
 
 def print_graph(stdscr, win, value, max_value):
     h,w = win.getmaxyx()
@@ -94,41 +108,63 @@ if __name__ in "__main__":
     (h, w) = stdscr.getmaxyx()
 
     # Info, half the screen (left)
-    winleft  = curses.newwin(h, int(w * 2 / 4), 0, 0)
+    left  = curses.newwin(h, int(w * 2 / 4), 0, 0)
 
     # Speed (1/4th of the screen, middle)
-    winmiddle = curses.newwin(h, int(w / 4) - 3, 0, int(2 / 4 * w))
+    middle = curses.newwin(h, int(w / 4) - 3, 0, int(2 / 4 * w))
 
     # RPM (1/4th of the screen, right)
-    winright = curses.newwin(h, int(w / 4) - 3, 0, int(3 / 4 * w))
+    right = curses.newwin(h, int(w / 4) - 3, 0, int(3 / 4 * w))
 
     tmp_inc = 0
     engine_coolant = 0
-    coolant_string = ""
+    coolant_str = ""
+    elapsed_time_str = ""
 
     while 1:
         try:
+
+            # RPM
             rpm = get_rpm(bus)
+            rpm_str = "RPM:  {0}".format(str(rpm).rjust(4))
+
+            # Vehicle speed
             speed = get_speed(bus)
+            speed_str = "Speed: {0} km/h".format(str(speed).rjust(3))
 
-            rpm_string = "RPM:  {0}".format(str(rpm).rjust(4))
-            speed_string = "Speed: {0} km/h".format(str(speed).rjust(3))
+            # Throttle position
+            throttle_pos = get_throttle_pos(bus)
+            throttle_str = "Throttle position: {0}%".format(str(throttle_pos).rjust(3))
 
-            if tmp_inc % 20 == 0:
+            # Accelerator pedal position
+            accel_pos = get_accel_pos(bus)
+            accel_str = "Accelerator pedal position: {0}%".format(str(accel_pos).rjust(3))
+
+            if tmp_inc % 60 == 0:
+                # Engine coolant temperature
                 engine_coolant = get_coolant_temp(bus)
-                coolant_string = "Engine coolant temperature: {0}ºC".format(str(engine_coolant).rjust(2))
+                coolant_str = "Engine coolant temperature: {0}ºC".format(str(engine_coolant).rjust(2))
+
+                # Elapsed time since engine started
+                elapsed_time = get_elapsed_time(bus)
+                elapsed_time = str(datetime.timedelta(seconds=elapsed_time))
+                elapsed_time_str = "Elapsed time since engine started: {0}".format(str(elapsed_time).rjust(6))
+
                 tmp_inc = 0
             tmp_inc += 1
 
             elt = 0
-            winleft.clear()
-            winleft.addstr(int(y_pad + elt * h/nb_elts), x_pad, rpm_string); elt += 1
-            winleft.addstr(int(y_pad + elt * h/nb_elts), x_pad, speed_string); elt += 1
-            winleft.addstr(int(y_pad + elt * h/nb_elts), x_pad, coolant_string); elt += 1
-            winleft.refresh()
+            left.clear()
+            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, rpm_str); elt += 1
+            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, speed_str); elt += 1
+            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, coolant_str); elt += 1
+            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, throttle_str); elt += 1
+            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, accel_str); elt += 1
+            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, elapsed_time_str); elt += 1
+            left.refresh()
 
-            print_graph(stdscr, winmiddle, speed, max_speed)
-            print_graph(stdscr, winright, rpm, max_rpm)
+            print_graph(stdscr, middle, speed, max_speed)
+            print_graph(stdscr, right, rpm, max_rpm)
 
         except Exception as e:
             print(e)
