@@ -20,6 +20,14 @@ def can_xchg(bus, arb_id, data, extended=False):
     #print("RX: {0}: {1})".format(hex(answer.arbitration_id), answer.data))
     return answer
 
+def bf(bus):
+    for y in range(0xff):
+        for x in range(0xff):
+            answer = can_xchg(bus, 0x7df, [3, 1, x, y, 0, 0, 0, 0])
+            if answer is not None:
+                print(answer)
+
+
 bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
 
 '''
@@ -65,5 +73,4 @@ if bits[0xa]:
         print(bus.recv())
 else:
     print("PID 9:0xa not supported")
-
 

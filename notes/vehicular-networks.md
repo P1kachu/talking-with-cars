@@ -66,6 +66,8 @@ uses it's own transport protocol in its vehicles, known as VW TP 2.0.
 
 #### ISO-TP
 
+// TODO
+
 #### TP 2.0
 - Application layer: KWP2000
 - Opens data "channels" between two communicating devices.
@@ -88,8 +90,8 @@ uses it's own transport protocol in its vehicles, known as VW TP 2.0.
     - Request should be sent from 0x200
     - Response sent with 0x200 + dest logical address (like 0x201 for ECU)
     - Communication then switches to CAN IDs negotiated during setup
->  0       1         2         3         4         5        6
-> Dest | Opcode | RX ID V | RX Pref | TX ID V | TX Pref |  App
+>  0       1         2         3          4          5          6
+> Dest | Opcode | RX ID | RX Pref + V | TX ID | TX Pref + V |  App
 - Fields:
     - Dest:    Logical address of destination module
     - Opcode:  Setup req (0xC0) - Positive Resp (0xD0) - Negative Resp (0xD6...0xD8)
@@ -104,11 +106,51 @@ uses it's own transport protocol in its vehicles, known as VW TP 2.0.
 0x310 and set the validity nibble for RX ID to invalid. The VW modules seem to
 respond that you should transmit using CAN ID 0x740."
 
+- See ../scripts/vw_kwp.py for examples
+
 ##### Channel parameters
-// TODO
+- 1 to 6 bytes
+- Setup parameters for an open channel or send test/break/disconnect signals
+- Request should be send straight after channel setup
+> 0      [ 1   2  3  4  5 ]
+> Opcode [ BS T1 T2 T3 T4 ]
+- Fields:
+    - Opcode:
+        - 0xA0: Parameters request, used for destination module to initiator
+          (6 byte)
+        - 0xA1: Parameters response, used for initiator to destination module
+          (6 byte)
+        - 0xA3: Channel test, response is same as parameters response. Used to
+          keep channel alive. (1 byte)
+        - 0xA4: Break, receiver discards all data since last ACK (1 byte)
+        - 0xA8: Disconnect, channel is no longer open. Receiver should reply
+          with a disconnect (1 byte)
+    - BS: Block size (number of packets to send before expecting a ACK)
+    - T1: Timing param 1, time to wait for ACK (T1 > (4 * T3))
+    - T2: Timing param 2, always 0xff
+    - T3: Timing param 3, interval between two packets
+    - T4: Timing param 4, always 0xff
+- See http://jazdw.net/tp20 for timing parameters format
 
 ##### Channel transmission
-// TODO
+- 2 to 8 bytes
+- Used for actual transmissions (after channel setup)
+>      0            1234567
+> Opcode + Seq    KWP payload
+- Fields:
+    - Opcode:
+        - 0x0: Waiting for ACK, more packets to follow
+        - 0x1: Waiting for ACK, this is the last packet
+        - 0x2: Not waiting for ACK, more packets to follow
+        - 0x3: Not waiting for ACK, this is the last packet
+        - 0x9: ACK, not ready for next packet
+        - 0xB: ACK, ready for next packet
+   - Seq: Sequence number, increments up to 0xF, then loop
+   - Payload: KWP2000 payload. The first 2 bytes of the first packet contains
+     the total length.
+
+##### Example
+See http://jazdw.net/tp20 for a working example
 
 ### LIN
 // TODO
