@@ -4,13 +4,15 @@ import can
 
 INTERFACE="can0"
 
-def print_bits(n, buf):
-    for i in range(n):
-        print(bin(buf[i]), end=' ')
-    print()
+def get_bits_msb(nb_data_bytes, buf):
+    bits = []
+    for i in range(3, nb_data_bytes + 3):
+        for reverse in range(7, -1, -1):
+            bits.append(((1 << reverse) & buf[i]) >> reverse)
+    return bits
 
 
-def send_and_wait(bus, arb_id, data, extended):
+def can_xchg(bus, arb_id, data, extended=False):
     msg = can.Message(arbitration_id=arb_id, data=data, extended_id=extended)
     bus.send(msg)
     #print("TX: {0}: {1})".format(hex(msg.arbitration_id), msg.data))
@@ -20,27 +22,48 @@ def send_and_wait(bus, arb_id, data, extended):
 
 bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
 
-# supported PIDs [0-20]
-#answer = send_and_wait(bus, 0x7df, [2, 1, 0, 0, 0, 0, 0, 0], False)
-#print_bits(4, answer.data)
-
+'''
 # Engine coolant temperature
-answer = send_and_wait(bus, 0x7df, [2, 1, 5, 0, 0, 0, 0, 0], False)
+answer = can_xchg(bus, 0x7df, [2, 1, 5, 0, 0, 0, 0, 0], False)
 temperature = answer.data[3] - 40
 print("Temperature: {0} degrees".format(temperature))
 
 # RPM
-answer = send_and_wait(bus, 0x7df, [2, 1, 0xc, 0, 0, 0, 0, 0], False)
+answer = can_xchg(bus, 0x7df, [2, 1, 0xc, 0, 0, 0, 0, 0], False)
 print("{0} rpm".format((answer.data[3] * 256 + answer.data[4])/4))
 
 # OBD standard this vehicle conforms to
-answer = send_and_wait(bus, 0x7df, [2, 1, 0x1c, 0, 0, 0, 0, 0], False)
+answer = can_xchg(bus, 0x7df, [2, 1, 0x1c, 0, 0, 0, 0, 0], False)
 print("OBD Standard: {0}".format(answer.data[2]))
 
 # Vehicle speed
-answer = send_and_wait(bus, 0x7df, [2, 1, 0xd, 0, 0, 0, 0, 0], False)
+answer = can_xchg(bus, 0x7df, [2, 1, 0xd, 0, 0, 0, 0, 0], False)
 print("{0} km/h".format(answer.data[3]))
 
 # Throttle position
-answer = send_and_wait(bus, 0x7df, [2, 1, 0x11, 0, 0, 0, 0, 0], False)
+answer = can_xchg(bus, 0x7df, [2, 1, 0x11, 0, 0, 0, 0, 0], False)
 print("Throttle position: {0}%".format(answer.data[3]))
+'''
+
+# Mode 1 supported PIDs
+answer = can_xchg(bus, 0x7df, [2, 1, 0x00, 0, 0, 0, 0, 0])
+print(get_bits_msb(4, answer.data))
+answer = can_xchg(bus, 0x7df, [2, 1, 0x20, 0, 0, 0, 0, 0])
+print(get_bits_msb(4, answer.data))
+answer = can_xchg(bus, 0x7df, [2, 1, 0x40, 0, 0, 0, 0, 0])
+print(get_bits_msb(4, answer.data))
+answer = can_xchg(bus, 0x7df, [2, 1, 0x60, 0, 0, 0, 0, 0])
+print(get_bits_msb(4, answer.data))
+
+# Mode 9 supported PIDs
+answer = can_xchg(bus, 0x7df, [2, 9, 0x00, 0, 0, 0, 0, 0])
+bits = get_bits_msb(4, answer.data)
+if bits[0xa]:
+    answer = can_xchg(bus, 0x7df, [2, 9, 0x09, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, 0x7df, [2, 9, 0x0a, 0, 0, 0, 0, 0])
+    for i in range(answer.data[3] - 1):
+        print(bus.recv())
+else:
+    print("PID 9:0xa not supported")
+
+
