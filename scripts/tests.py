@@ -15,9 +15,11 @@ def get_bits_msb(nb_data_bytes, buf):
 def can_xchg(bus, arb_id, data, extended=False):
     msg = can.Message(arbitration_id=arb_id, data=data, extended_id=extended)
     bus.send(msg)
-    #print("TX: {0}: {1})".format(hex(msg.arbitration_id), msg.data))
+    print("TX: {0}".format(msg))
     answer = bus.recv(0.2)
-    #print("RX: {0}: {1})".format(hex(answer.arbitration_id), answer.data))
+    if not answer:
+        return
+    print("RX: {0}".format(answer))
     return answer
 
 bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
@@ -72,20 +74,27 @@ else:
 def bruteforce_byte_0(bus, arb_id):
     for i in range(0x20):
         can_xchg(bus, arb_id, [i, 0, 0, 0, 0, 0, 0, 0])
-        can_xchg(bus, arb_id, [i, 64, 64, 64, 64, 64, 64, 64]) 
+        can_xchg(bus, arb_id, [i, 64, 64, 64, 64, 64, 64, 64])
         can_xchg(bus, arb_id, [i, 128, 128, 128, 128, 128, 128, 128])
-        can_xchg(bus, arb_id, [i, 255, 255, 255, 255, 255, 255, 255]) 
+        can_xchg(bus, arb_id, [i, 255, 255, 255, 255, 255, 255, 255])
 
 def bruteforce_byte_1(bus, arb_id):
     for i in range(0x20):
         can_xchg(bus, arb_id, [1, i, 0, 0, 0, 0, 0, 0])
     for i in range(0x20):
-        can_xchg(bus, arb_id, [1, i, 64, 64, 64, 64, 64, 64]) 
+        can_xchg(bus, arb_id, [1, i, 64, 64, 64, 64, 64, 64])
     for i in range(0x20):
         can_xchg(bus, arb_id, [1, i, 128, 128, 128, 128, 128, 128])
     for i in range(0x20):
-        can_xchg(bus, arb_id, [1, i, 255, 255, 255, 255, 255, 255]) 
+        can_xchg(bus, arb_id, [1, i, 255, 255, 255, 255, 255, 255])
 
 #bruteforce_byte_0(bus, 0x711)
 #bruteforce_byte_0(bus, 0x711)
-bruteforce_byte_1(bus, 0x7f1)
+#bruteforce_byte_1(bus, 0x7f1)
+
+# Vehicle specific testing
+for i in range(0xffffff):
+    msg = can_xchg(bus, 0x7df, [0x3, 0x22, i & 0xff, i >> 8 & 0xff, i >> 16, 0, 0, 0])
+    #if msg:
+    #    print("Response received for PID {0}: {1}".format(i, msg))
+    #    break
