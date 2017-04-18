@@ -1,0 +1,58 @@
+---
+
+candump  -a -d -e -x can0  | grep -B1 RX >> can_logs/test_kwp_id.log
+
+for i in range(0xfff):
+    answer = can_xchg(bus, i, [7, 0x1, 0xc0, 0x0, 0x10, 0x0, 0x3, 0x1])
+
+
+---
+
+can0  TX - -  70A   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  774   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  711   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  77B   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  713   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  77D   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  714   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  77E   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  715   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  77F   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  7F1   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  7F9   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+// Actual request sent from 0xF0x
+
+can0  TX - -  70A   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  774   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  711   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  77B   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  713   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  77D   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  714   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  77E   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  715   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  77F   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  751   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  7BB   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  76C   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  7D6   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+can0  TX - -  7F1   [8]  07 01 C0 00 10 00 03 01   '........'
+can0  RX - -  7F9   [8]  03 7F 01 11 AA AA AA AA   '........'
+
+#### Tests
+
+- See can
+
