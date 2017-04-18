@@ -1,0 +1,31 @@
+---
+
+./cc dcm discovery > can_logs/test_dcm_discovery_caribou.log
+
+---
+
+
+-------------------
+CARING CARIBOU v0.1
+-------------------
+
+Loaded module 'dcm'
+
+Starting diagnostics service discovery
+Sending diagnostics Tester Present to 0x0700 
+Found diagnostics at arbitration ID 0x0700, reply at 0x077e
+
+Found diagnostics at arbitration ID 0x0700, reply at 0x077b
+
+Found diagnostics at arbitration ID 0x0700, reply at 0x077d
+
+Found diagnostics at arbitration ID 0x0700, reply at 0x07e8
+
+Found diagnostics at arbitration ID 0x0700, reply at 0x07d6
+
+Found diagnostics at arbitration ID 0x0700, reply at 0x0774
+
+Found diagnostics at arbitration ID 0x0700, reply at 0x07bb
+
+Found diagnostics at arbitration ID 0x0700, reply at 0x077f
+
