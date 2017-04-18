@@ -8,4 +8,5 @@ Playing with CAN
 - https://hackaday.io/project/6288/logs
 - http://jazdw.net/tp20
 - https://hackaday.io/project/6288-volkswagen-can-bus-gaming
+- http://illmatics.com/carhacking.html
 - ../docs/
