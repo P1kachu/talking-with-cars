@@ -22,6 +22,23 @@ def can_xchg(bus, arb_id, data, extended=False):
     print("RX: {0}".format(answer))
     return answer
 
+def bruteforce_byte_0(bus, arb_id):
+    for i in range(0x20):
+        can_xchg(bus, arb_id, [i, 0, 0, 0, 0, 0, 0, 0])
+        can_xchg(bus, arb_id, [i, 64, 64, 64, 64, 64, 64, 64])
+        can_xchg(bus, arb_id, [i, 128, 128, 128, 128, 128, 128, 128])
+        can_xchg(bus, arb_id, [i, 255, 255, 255, 255, 255, 255, 255])
+
+def bruteforce_byte_1(bus, arb_id):
+    for i in range(0x20):
+        can_xchg(bus, arb_id, [1, i, 0, 0, 0, 0, 0, 0])
+    for i in range(0x20):
+        can_xchg(bus, arb_id, [1, i, 64, 64, 64, 64, 64, 64])
+    for i in range(0x20):
+        can_xchg(bus, arb_id, [1, i, 128, 128, 128, 128, 128, 128])
+    for i in range(0x20):
+        can_xchg(bus, arb_id, [1, i, 255, 255, 255, 255, 255, 255])
+
 bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
 
 '''
@@ -55,8 +72,6 @@ answer = can_xchg(bus, 0x7df, [2, 1, 0x20, 0, 0, 0, 0, 0])
 print(get_bits_msb(4, answer.data))
 answer = can_xchg(bus, 0x7df, [2, 1, 0x40, 0, 0, 0, 0, 0])
 print(get_bits_msb(4, answer.data))
-#answer = can_xchg(bus, 0x7df, [2, 1, 0x60, 0, 0, 0, 0, 0])
-#print(get_bits_msb(4, answer.data))
 
 # Mode 9 supported PIDs
 answer = can_xchg(bus, 0x7df, [2, 9, 0x00, 0, 0, 0, 0, 0])
@@ -69,28 +84,11 @@ if bits[0xa]:
         print(bus.recv())
 else:
     print("PID 9:0xa not supported")
-'''
 
-def bruteforce_byte_0(bus, arb_id):
-    for i in range(0x20):
-        can_xchg(bus, arb_id, [i, 0, 0, 0, 0, 0, 0, 0])
-        can_xchg(bus, arb_id, [i, 64, 64, 64, 64, 64, 64, 64])
-        can_xchg(bus, arb_id, [i, 128, 128, 128, 128, 128, 128, 128])
-        can_xchg(bus, arb_id, [i, 255, 255, 255, 255, 255, 255, 255])
-
-def bruteforce_byte_1(bus, arb_id):
-    for i in range(0x20):
-        can_xchg(bus, arb_id, [1, i, 0, 0, 0, 0, 0, 0])
-    for i in range(0x20):
-        can_xchg(bus, arb_id, [1, i, 64, 64, 64, 64, 64, 64])
-    for i in range(0x20):
-        can_xchg(bus, arb_id, [1, i, 128, 128, 128, 128, 128, 128])
-    for i in range(0x20):
-        can_xchg(bus, arb_id, [1, i, 255, 255, 255, 255, 255, 255])
-
-#bruteforce_byte_0(bus, 0x711)
-#bruteforce_byte_0(bus, 0x711)
-#bruteforce_byte_1(bus, 0x7f1)
+# Testing like stupid
+bruteforce_byte_0(bus, 0x711)
+bruteforce_byte_0(bus, 0x711)
+bruteforce_byte_1(bus, 0x7f1)
 
 # Vehicle specific testing
 for i in range(0xffffff):
@@ -98,3 +96,4 @@ for i in range(0xffffff):
     #if msg:
     #    print("Response received for PID {0}: {1}".format(i, msg))
     #    break
+'''
