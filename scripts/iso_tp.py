@@ -13,7 +13,6 @@ SEND_KEY = 0x2
 VW_REQUEST_SEED = 0x3
 VW_SEND_KEY = 0x4
 
-
 def can_xchg(bus, arb_id, data, extended=False):
     msg = can.Message(arbitration_id=arb_id, data=data, extended_id=extended)
     bus.send(msg)
@@ -35,24 +34,29 @@ def iso_tp_init_diagnostic_session(bus, arb_id, session_type=EXTENDED_DIAGNOSTIC
 
     return answer
 
+def compute_key(seed):
+    return seed # Needs some RE
+
 def iso_tp_init_security_session(bus, arb_id, req_seed=REQUEST_SEED, send_key=SEND_KEY):
-    for i in range(10):
-        answer = can_xchg(bus, arb_id, [2, 0x27, req_seed, 0, 0, 0, 0, 0])
-        answer = can_xchg(bus, arb_id, [6, 0x27, send_key, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, arb_id, [2, 0x27, req_seed, 0, 0, 0, 0, 0])
 
     if answer and answer.data[1] == 0x67:
-        seed = answer.data[3:5]
+        seed = list(answer.data[3:7])
         print("Security session seed: {0}".format(seed))
     else:
         print("Failure in establishing ISO-TP security session")
         return None
 
+    data_key = [6, 0x27, send_key] + compute_key(seed) + [0]
     answer = can_xchg(bus, arb_id, [6, 0x27, send_key, 0, 0, 0, 0, 0])
 
     if answer and answer.data[1] == 0x67:
         print("Security session opened!")
     elif answer and answer.data[3] == 0x35:
         print("Bad key in security session init")
+        return None
+    elif answer and answer.data[3] == 0x37:
+        print("requiredTimeDelayNotExpired in security session init")
         return None
     else:
         print("Failure in sending security session key")
@@ -77,4 +81,4 @@ def iso_tp_init_upload_session(bus, arb_id):
 bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
 if iso_tp_init_diagnostic_session(bus, 0x7e0):
     if iso_tp_init_security_session(bus, 0x7e0, VW_REQUEST_SEED, VW_SEND_KEY):
-        print("OK")
+        print("GO DUMP STUFF")
