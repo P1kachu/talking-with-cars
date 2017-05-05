@@ -68,6 +68,7 @@ uses it's own transport protocol in its vehicles, known as VW TP 2.0.
 
 > https://en.wikipedia.org/wiki/Unified_Diagnostic_Services
 > Adventures in Automotive Networks and Control Units - Miller & Valasek
+> https://automotive.wiki/index.php/ISO_14229
 
 // TODO
 
