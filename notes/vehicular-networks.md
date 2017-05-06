@@ -54,6 +54,49 @@ Different configuration possible, but we are interested in this one:
   Sender resend if not ACK
   If too many error from a receiver, it stops itself temporarily
 
+#### CAN (11-bit) bus packets
+> https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format
+> https://en.wikipedia.org/wiki/OBD-II_PIDs#Mode_01
+
+- The diagnostic reader initiates a query using CAN ID 7DFh, which acts as a
+  broadcast address, and accepts responses from any ID in the range 7E8h to 7EFh.
+  ECUs that can respond to OBD queries listen both to the functional broadcast ID
+  of 7DFh and one assigned ID in the range 7E0h to 7E7h. Their response has an ID
+  of their assigned ID plus 8 e.g. 7E8h through 7EFh. This approach allows up
+  to eight ECUs, each independently responding to OBD queries.
+
+Transmission example (SAE standard):
+
+> Interface |  Pin   |   ID   |  Length  |      Data         |
+>
+> can0         TX - -    7DF      [8]    02 01 05 00 00 00 00 00
+>
+> can0         RX - -    7E8      [8]    03 41 05 82 AA AA AA AA
+
+- The first line is the request (TX). The ID 7DF is the diagnostic reader.
+  It sends 8 bytes of data: The first one is the number of additionnal data
+  bytes (here 2), the second is the mode (here, show current data) and the
+  third is the PID code (05 = Engine coolant temperature).
+- The second line is the answer. The vehicle responds to the PID query on the
+  CAN bus with message IDs that depend on which module responded. The engine
+  or main ECU is typically 7E8h.
+  The data can be read as:
+  - Byte 0: Number of additionnal data bytes
+  - Byte 1: Custom mode (mode + 40h) here is show current data
+  - Byte 2: PID code
+  - Byte 3: Byte 0 of the specified parameter
+  - Byte 4: Byte 1 of the specified parameter (optional)
+  - Byte 5: Byte 2 of the specified parameter (optional)
+  - Byte 6: Byte 3 of the specified parameter (optional)
+  - Byte 7: Not used (0x00 || 0x55 || 0xAA)
+
+- So, in our previous example, we (7DFh) send a message containing 3 bytes of
+  data, asking for the current value of the engine coolant temperature. The ECU
+  (7E8h) answers with 4 bytes of data, the final byte being the temperature.
+  Following the explanation from wikipedia (second link in sources above), we
+  can determine that the temperature is (0x82 - 40) degrees.
+
+
 ### ISO-TP and TP 2.0
 
 Pure CAN cannot satisfy the requirements that have to be fulfilled within
