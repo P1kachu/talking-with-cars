@@ -1,0 +1,740 @@
+TX: Timestamp:        0.000000        ID: 0700    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.912582        ID: 077d    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0700    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.915723        ID: 077e    000    DLC: 8    03 7f 10 21 aa aa aa aa
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0700    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.915989        ID: 077b    000    DLC: 8    03 7f 10 21 aa aa aa aa
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0700    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.917626        ID: 077d    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0700    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981159.918358        ID: 077e    000    DLC: 8    03 7f 10 21 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 0703    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.918626        ID: 077b    000    DLC: 8    03 7f 10 21 aa aa aa aa
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.919148        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.921545        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981159.922033        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.922566        ID: 077d    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981159.924104        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.925374        ID: 0774    000    DLC: 8    03 7f 10 21 aa aa aa aa
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.925856        ID: 07bb    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981159.929385        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.932334        ID: 07d6    000    DLC: 8    03 7f 10 21 aa aa aa aa
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.935313        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981159.948251        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981159.956204        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 27 03 00 00 00 00 00
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0704    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0706    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0707    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 0708    000    DLC: 8    02 10 03 00 00 00 00 00
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.583517        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.605181        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.623644        ID: 0774    000    DLC: 8    06 67 03 f9 00 4a ff aa
+Security session seed: [249, 0, 74, 255]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.643529        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.663521        ID: 0774    000    DLC: 8    06 67 03 05 8d 9a 50 aa
+Security session seed: [5, 141, 154, 80]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.683537        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.703630        ID: 0774    000    DLC: 8    06 67 03 44 5b e7 74 aa
+Security session seed: [68, 91, 231, 116]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.725435        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.745645        ID: 0774    000    DLC: 8    06 67 03 33 44 35 8b aa
+Security session seed: [51, 68, 53, 139]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.763527        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.783590        ID: 0774    000    DLC: 8    06 67 03 a1 d4 83 94 aa
+Security session seed: [161, 212, 131, 148]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.805185        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.823518        ID: 0774    000    DLC: 8    06 67 03 ad 31 d1 a3 aa
+Security session seed: [173, 49, 209, 163]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.845656        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.865638        ID: 0774    000    DLC: 8    06 67 03 0c 89 20 31 aa
+Security session seed: [12, 137, 32, 49]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.885641        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.905385        ID: 0774    000    DLC: 8    06 67 03 9d 8a 6e 67 aa
+Security session seed: [157, 138, 110, 103]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.923515        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.943532        ID: 0774    000    DLC: 8    06 67 03 a4 7f bc 64 aa
+Security session seed: [164, 127, 188, 100]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981160.963512        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981160.983540        ID: 0774    000    DLC: 8    06 67 03 7f cb 0b 4d aa
+Security session seed: [127, 203, 11, 77]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.003588        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.025355        ID: 0774    000    DLC: 8    06 67 03 d0 5a 58 d0 aa
+Security session seed: [208, 90, 88, 208]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.043494        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.065626        ID: 0774    000    DLC: 8    06 67 03 8b 2a a7 75 aa
+Security session seed: [139, 42, 167, 117]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.083547        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.103666        ID: 0774    000    DLC: 8    06 67 03 cc db f4 a5 aa
+Security session seed: [204, 219, 244, 165]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.125343        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.145645        ID: 0774    000    DLC: 8    06 67 03 55 54 42 9c aa
+Security session seed: [85, 84, 66, 156]
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.163500        ID: 0774    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 070a    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.183518        ID: 0774    000    DLC: 8    06 67 03 f4 d7 90 d8 aa
+Security session seed: [244, 215, 144, 216]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.188723        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.195694        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.201119        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.205136        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.208824        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.215217        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.218866        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.225353        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.228749        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.235235        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.241177        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.245670        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.250068        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.255216        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.258853        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.262726        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.268441        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.275544        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.279056        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.282236        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.288285        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.293576        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.299092        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.302545        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.308360        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.315205        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.318887        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.328276        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.335200        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.339464        ID: 077b    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0711    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.342712        ID: 077b    000    DLC: 8    06 67 03 6e 2b cf 2f aa
+Security session seed: [110, 43, 207, 47]
+TX: Timestamp:        0.000000        ID: 0713    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.347535        ID: 077d    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0713    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.352534        ID: 077d    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0713    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.363527        ID: 077d    000    DLC: 8    03 7f 27 37 aa aa aa aa
+requiredTimeDelayNotExpired in security session init
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.368821        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.375579        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.379143        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.382571        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.388249        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.395839        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.401104        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.405126        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.408842        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.415231        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.418802        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.425332        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.428734        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.435230        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.441098        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.445665        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.450080        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.455755        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.459139        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.462565        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.468390        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.475530        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.478895        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.482044        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.488277        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.495701        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.501334        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.505420        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.508811        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.515728        ID: 077e    000    DLC: 8    06 50 03 00 28 00 c8 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0714    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.521098        ID: 077e    000    DLC: 8    06 67 03 44 2b 73 39 aa
+Security session seed: [68, 43, 115, 57]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.566669        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.616614        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.656587        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.706616        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.746634        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.796629        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.836615        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.886332        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981161.926642        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981161.976663        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.016581        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.066682        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.106311        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.156313        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.196287        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.246685        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.286644        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.336677        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.376702        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.426701        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.466645        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.516307        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.556690        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.606334        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.646319        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.696690        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.736310        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.786763        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.826648        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.876702        ID: 077f    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 0715    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.916321        ID: 077f    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 0751    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.945636        ID: 07bb    000    DLC: 8    06 67 03 14 d6 0f 27 aa
+Failure in establishing ISO-TP diagnostic session
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.959772        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.968578        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.978532        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981162.988570        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981162.999375        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.008838        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.018995        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.028564        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.038539        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.048661        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.059300        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.068803        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.078516        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.088577        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.099370        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.108570        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.122569        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.132011        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.145544        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.158827        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.170859        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.178579        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.189564        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.199406        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.208519        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.219040        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.228535        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.240486        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.249941        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.259324        ID: 07d6    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 076c    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.268746        ID: 07d6    000    DLC: 8    03 7f 27 11 aa aa aa aa
+Failure in sending security session key
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.279105        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.289171        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.309138        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.319140        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.339179        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.349142        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.369138        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.379229        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.399132        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.409123        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.429109        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.439150        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.459197        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.469150        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.489116        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.499199        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.519727        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.529140        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.549133        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.559154        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.579199        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.589143        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.609119        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.619191        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.639181        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.649165        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.669212        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.679167        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.699193        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.709141        ID: 07e8    000    DLC: 8    06 50 03 00 32 01 f4 aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07e0    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.729138        ID: 07e8    000    DLC: 8    06 67 03 62 77 31 79 aa
+Security session seed: [98, 119, 49, 121]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.776686        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.826768        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.866666        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981163.916390        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981163.956334        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.006691        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.046396        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.096689        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.136677        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.186711        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.226759        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.276390        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.316390        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.366508        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.406740        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.456406        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.496824        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.546708        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.586729        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.636390        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.676374        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.726754        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.766545        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.816864        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.856422        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.906826        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981164.946778        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981164.996734        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981165.036717        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 10 03 00 00 00 00 00
+RX: Timestamp: 1491981165.086567        ID: 07f9    000    DLC: 8    06 50 03 00 4b 00 fa aa
+Diagnostic session susccessfuly opened
+TX: Timestamp:        0.000000        ID: 07f1    000    DLC: 8    02 27 03 00 00 00 00 00
+RX: Timestamp: 1491981165.126760        ID: 07f9    000    DLC: 8    06 67 03 92 a4 6b 67 aa
+Security session seed: [146, 164, 107, 103]
