@@ -1,0 +1,4 @@
+- Try timing attack
+- Try different actions when requesting readByCommonIdentifier
+- Try readByLocalIdentifier
+- Try different ECUs for ^
