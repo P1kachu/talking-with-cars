@@ -18,4 +18,5 @@ For any question, feel free to send me an email at p1kachu@lse.epita.fr
 - http://jazdw.net/tp20
 - https://hackaday.io/project/6288-volkswagen-can-bus-gaming
 - http://illmatics.com/carhacking.html
+- http://nefariousmotorsports.com/forum/
 - ../docs/
