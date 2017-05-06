@@ -107,11 +107,104 @@ longer than 8 bytes it is necessary to use a transport protocol. The OBD-II
 specification for example makes use of ISO-TP (ISO 15765-2). Volkswagen however
 uses it's own transport protocol in its vehicles, known as VW TP 2.0.
 
-#### ISO-TP
+#### ISO-TP - ISO-14229 - UDS
 
 > https://en.wikipedia.org/wiki/Unified_Diagnostic_Services
 > Adventures in Automotive Networks and Control Units - Miller & Valasek
 > https://automotive.wiki/index.php/ISO_14229
+
+- Unified Diagnostic Services (UDS) is a diagnostic communication protocol ECU
+  environment within the automotive electronics, which is specified in the ISO
+  14229-1 It is derived from ISO 14230-3 (KWP2000) and ISO 15765-3 (Diagnostic
+  Communication over Controller Area Network (DoCAN)).
+
+##### Service IDs
+
+> 0x10 	Diagnostic Session Control
+> 0x11 	ECU Reset
+> 0x14 	Clear Diagnostic Information
+> 0x19 	Read DTC Information
+> 0x22 	Read Data By Identifier
+> 0x23 	Read Memory By Address
+> 0x27 	Security Access
+> 0x28 	Communication Control
+> 0x2E 	Write Data By Identifier
+> 0x2F 	Input Output Control By Identifier
+> 0x31 	Routine Control
+> 0x34 	Request Download
+> 0x35 	Request Upload
+> 0x36 	Transfer Data
+> 0x37 	Transfer Exit
+> 0x3D 	Write Memory By Address
+> 0x3E 	Tester Present
+> 0x85 	Control DTC Setting
+
+##### Negative Response Codes (NRCs)
+
+- The negative response codes (NRC) are divided into 3 ranges:
+    - 0x00: positiveResponse parameter value for server internal implementation,
+    - 0x01 – 0x7F: communication related negative response codes,
+    - 0x80 – 0xFF: negative response codes for specific conditions that are not
+      correct at the point in time the request is received by the server. These
+      response codes may be utilized whenever response code 0x22
+      (conditionsNotCorrect) is listed as valid in order to report more
+      specifically why the requested action can not be taken.
+
+> 0x00:      positiveResponse
+> 0x01-0x0F: ISOSAEReserved
+> 0x10:      generalReject
+> 0x11:      serviceNotSupported
+> 0x12:      subFunctionNotSupported
+> 0x13:      incorrectMessageLengthOrInvalidFormat
+> 0x14:      responseTooLong
+> 0x15-0x20: ISOSAEReserved
+> 0x21:      busyRepeatReques
+> 0x22:      conditionsNotCorrect
+> 0x23:      ISOSAEReserved
+> 0x24:      requestSequenceError
+> 0x25-0x30: ISOSAEReserved
+> 0x31:      requestOutOfRange
+> 0x32:      ISOSAEReserved
+> 0x33:      securityAccessDenied
+> 0x34:      ISOSAEReserved
+> 0x35:      invalidKey
+> 0x36:      exceedNumberOfAttempts
+> 0x37:      requiredTimeDelayNotExpired
+> 0x38-0x4F: reservedByExtendedDataLinkSecurityDocument
+> 0x50-0x6F: ISOSAEReserved
+> 0x70:      uploadDownloadNotAccepted
+> 0x71:      transferDataSuspended
+> 0x72:      generalProgrammingFailure
+> 0x73:      wrongBlockSequenceCounter
+> 0x74-0x77: ISOSAEReserved
+> 0x78:      requestCorrectlyReceived-ResponsePending
+> 0x79-0x7D: ISOSAEReserved
+> 0x7E:      subFunctionNotSupportedInActiveSession
+> 0x7F:      serviceNotSupportedInActiveSession
+> 0x80:      ISOSAEReserved
+> 0x81:      rpmTooHigh
+> 0x82:      rpmTooLow
+> 0x83:      engineIsRunning
+> 0x84:      engineIsNotRunning
+> 0x85:      engineRunTimeTooLow
+> 0x86:      temperatureTooHigh
+> 0x87:      temperatureTooLow
+> 0x88:      vehicleSpeedTooHigh
+> 0x89:      vehicleSpeedTooLow
+> 0x8A:      throttle/PedalTooHigh
+> 0x8B:      throttle/PedalTooLow
+> 0x8C:      transmissionRangeNotInNeutral
+> 0x8D:      transmissionRangeNotInGear
+> 0x8E:      ISOSAEReserved
+> 0x8F:      brakeSwitch(es)NotClosed
+> 0x90:      shifterLeverNotInPark
+> 0x91:      torqueConverterClutchLocked
+> 0x92:      voltageTooHigh
+> 0x93:      voltageTooLow
+> 0x94-0xFE: reservedForSpecificConditionsNotCorrect
+> 0xFF:      ISOSAEReserved
+
+- See ../scripts/iso_tp.py for examples
 
 // TODO
 
@@ -177,6 +270,7 @@ respond that you should transmit using CAN ID 0x740."
     - T2: Timing param 2, always 0xff
     - T3: Timing param 3, interval between two packets
     - T4: Timing param 4, always 0xff
+
 - See http://jazdw.net/tp20 for timing parameters format
 
 ##### Channel transmission
