@@ -55,6 +55,9 @@ def iso_tp_init_security_session(bus, arb_id, req_seed=REQUEST_SEED, send_key=SE
     elif answer and answer.data[3] == 0x35:
         print("Bad key in security session init")
         return None
+    elif answer and answer.data[3] == 0x36:
+        print("ExceedNumberOfAttempts in security session init")
+        return None
     elif answer and answer.data[3] == 0x37:
         print("requiredTimeDelayNotExpired in security session init")
         return None
