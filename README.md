@@ -20,4 +20,3 @@ For any question, feel free to send me an email at p1kachu@lse.epita.fr
 - http://illmatics.com/carhacking.html
 - http://nefariousmotorsports.com/forum/
 - http://nefariousmotorsports.com/forum/index.php?topic=4983
-- ../docs/

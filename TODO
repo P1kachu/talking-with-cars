@@ -2,3 +2,4 @@
 - Try different actions when requesting readByCommonIdentifier
 - Try readByLocalIdentifier
 - Try different ECUs for ^
+- Try different security access levels
