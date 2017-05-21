@@ -11,6 +11,7 @@ x_pad = 2
 max_rpm = 6000
 #max_speed = 255
 max_speed = 130
+arbitration_id = 0x7df
 
 def can_xchg(bus, arb_id, data, ext=False):
     msg = can.Message(arbitration_id=arb_id,
@@ -20,28 +21,28 @@ def can_xchg(bus, arb_id, data, ext=False):
     return bus.recv()
 
 def get_coolant_temp(bus):
-    answer = can_xchg(bus, 0x7df, [2, 1, 5, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, arbitration_id, [2, 1, 5, 0, 0, 0, 0, 0])
     return answer.data[3] - 40
 
 def get_rpm(bus):
-    answer = can_xchg(bus, 0x7df, [2, 1, 0xc, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, arbitration_id, [2, 1, 0xc, 0, 0, 0, 0, 0])
     return int((answer.data[3] * 256 + answer.data[4])/4)
 
 def get_speed(bus):
-    answer = can_xchg(bus, 0x7df, [2, 1, 0xd, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, arbitration_id, [2, 1, 0xd, 0, 0, 0, 0, 0])
     return answer.data[3]
 
 def get_throttle_pos(bus):
-    answer = can_xchg(bus, 0x7df, [2, 1, 0x11, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, arbitration_id, [2, 1, 0x11, 0, 0, 0, 0, 0])
     return int(100 * answer.data[3] / 255)
 
 def get_accel_pos(bus):
     #0x49 0x4a 0x4b
-    answer = can_xchg(bus, 0x7df, [2, 1, 0x49, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, arbitration_id, [2, 1, 0x49, 0, 0, 0, 0, 0])
     return int(100 * answer.data[3] / 255)
 
 def get_elapsed_time(bus):
-    answer = can_xchg(bus, 0x7df, [2, 1, 0x1f, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, arbitration_id, [2, 1, 0x1f, 0, 0, 0, 0, 0])
     return int(256 * answer.data[3] + answer.data[4])
 
 def print_graph(stdscr, win, value, max_value):
@@ -70,7 +71,6 @@ def print_graph(stdscr, win, value, max_value):
             win.addstr(y, 0, "_" * w, color)
     except:
         clean(stdscr)
-        print("current_top={0} - y={1} - h={1}".format(y, current_top, h-1))
         exit()
 
     stdscr.move(0,0)
