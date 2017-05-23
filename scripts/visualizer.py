@@ -4,45 +4,71 @@ import curses
 import can
 import datetime
 
+# curses parameters
 nb_elts = 8
 y_pad = 2
 x_pad = 2
-#max_rpm = 8000
-max_rpm = 6000
-#max_speed = 255
-max_speed = 130
-arbitration_id = 0x7df
+max_rpm = 6000  # In practice, not in theory
+max_speed = 130 # Same ^
+
+# CAN parameters
+INTERFACE='can0'
+can_11bits_diagnostic_id = 0x7df      # Classic 11bits CAN ID
+#can_29bits_diagnostic_id = 0xBE3EB811 # FIAT 500 (29bits) CAN ID
+#can_29bits_diagnostic_id = 0x80022000 # FIAT 500 (29bits) CAN ID
+#can_29bits_diagnostic_id = 0xC0C00000 # FIAT 500 (29bits) CAN ID
+diagnostic_id = can_11bits_diagnostic_id
+
+def _is_answer(answer, data):
+    '''
+    Check if the message received answers our query
+    '''
+    ret = True
+
+    ret &= (answer.data[1] == data[1] + 0x40) # REQUEST MODE
+    ret &= (answer.data[2] == data[2])        # REQUEST PID
+
+    return ret
 
 def can_xchg(bus, arb_id, data, ext=False):
+    '''
+    Noise proof
+    '''
     msg = can.Message(arbitration_id=arb_id,
             data=data,
             extended_id=ext)
+
     bus.send(msg)
-    return bus.recv()
+
+    answer = bus.recv()
+    while not _is_answer(answer, data):
+        answer = bus.recv()
+
+    return answer
 
 def get_coolant_temp(bus):
-    answer = can_xchg(bus, arbitration_id, [2, 1, 5, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 5, 0, 0, 0, 0, 0])
     return answer.data[3] - 40
 
 def get_rpm(bus):
-    answer = can_xchg(bus, arbitration_id, [2, 1, 0xc, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0xc, 0, 0, 0, 0, 0])
     return int((answer.data[3] * 256 + answer.data[4])/4)
 
 def get_speed(bus):
-    answer = can_xchg(bus, arbitration_id, [2, 1, 0xd, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0xd, 0, 0, 0, 0, 0])
     return answer.data[3]
 
 def get_throttle_pos(bus):
-    answer = can_xchg(bus, arbitration_id, [2, 1, 0x11, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x11, 0, 0, 0, 0, 0])
     return int(100 * answer.data[3] / 255)
 
 def get_accel_pos(bus):
     #0x49 0x4a 0x4b
-    answer = can_xchg(bus, arbitration_id, [2, 1, 0x49, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x49, 0, 0, 0, 0, 0])
     return int(100 * answer.data[3] / 255)
 
 def get_elapsed_time(bus):
-    answer = can_xchg(bus, arbitration_id, [2, 1, 0x1f, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x1f, 0, 0, 0, 0, 0])
     return int(256 * answer.data[3] + answer.data[4])
 
 def print_graph(stdscr, win, value, max_value):
@@ -103,7 +129,7 @@ def clean(stdscr):
 
 if __name__ in "__main__":
 
-    bus = can.interface.Bus(channel="can0", bustype='socketcan_native')
+    bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
     stdscr = init()
     (h, w) = stdscr.getmaxyx()
 
