@@ -4,26 +4,28 @@ import curses
 import can
 import datetime
 
-# curses parameters
+# Constants
 nb_elts = 8
 y_pad = 2
 x_pad = 2
 max_rpm = 6000  # In practice, not in theory
 max_speed = 130 # Same ^
+can_11bits_diagnostic_id = 0x7df      # Classic 11bits CAN ID
+can_29bits_diagnostic_id = 0x18DB33F1 # FIAT 500 (29bits) CAN ID
 
 # CAN parameters
 INTERFACE='can0'
-can_11bits_diagnostic_id = 0x7df      # Classic 11bits CAN ID
-#can_29bits_diagnostic_id = 0xBE3EB811 # FIAT 500 (29bits) CAN ID
-#can_29bits_diagnostic_id = 0x80022000 # FIAT 500 (29bits) CAN ID
-#can_29bits_diagnostic_id = 0xC0C00000 # FIAT 500 (29bits) CAN ID
-diagnostic_id = can_11bits_diagnostic_id
+diagnostic_id = can_29bits_diagnostic_id # 29bits -> Fiat 500 / 11bits -> VW Polo
+extended = (diagnostic_id == can_29bits_diagnostic_id)
 
 def _is_answer(answer, data):
     '''
     Check if the message received answers our query
     '''
     ret = True
+
+    if len(answer.data) < 3:
+        return False
 
     ret &= (answer.data[1] == data[1] + 0x40) # REQUEST MODE
     ret &= (answer.data[2] == data[2])        # REQUEST PID
@@ -40,35 +42,53 @@ def can_xchg(bus, arb_id, data, ext=False):
 
     bus.send(msg)
 
-    answer = bus.recv()
-    while not _is_answer(answer, data):
-        answer = bus.recv()
-
+    answer = bus.recv(0.1)
+    while not answer or not _is_answer(answer, data):
+        # 29bits CAN requires to resend the message until
+        # the answer is received.
+        bus.send(msg)
+        answer = bus.recv(0.1)
     return answer
 
 def get_coolant_temp(bus):
-    answer = can_xchg(bus, diagnostic_id, [2, 1, 5, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 5, 0, 0, 0, 0, 0], extended)
+    if answer is None:
+        return 0
     return answer.data[3] - 40
 
 def get_rpm(bus):
-    answer = can_xchg(bus, diagnostic_id, [2, 1, 0xc, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0xc, 0, 0, 0, 0, 0], extended)
+    if answer is None:
+        return 0
     return int((answer.data[3] * 256 + answer.data[4])/4)
 
 def get_speed(bus):
-    answer = can_xchg(bus, diagnostic_id, [2, 1, 0xd, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0xd, 0, 0, 0, 0, 0], extended)
+    if answer is None:
+        return 0
     return answer.data[3]
 
 def get_throttle_pos(bus):
-    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x11, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x11, 0, 0, 0, 0, 0], extended)
+    if answer is None:
+        return 0
     return int(100 * answer.data[3] / 255)
 
 def get_accel_pos(bus):
     #0x49 0x4a 0x4b
-    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x49, 0, 0, 0, 0, 0])
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x49, 0, 0, 0, 0, 0], extended)
+    if answer is None:
+        return 0
     return int(100 * answer.data[3] / 255)
 
 def get_elapsed_time(bus):
-    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x1f, 0, 0, 0, 0, 0])
+    # 29bits CAN doesn't answer this query. Don't know why
+    if diagnostic_id == can_29bits_diagnostic_id:
+        return 0
+
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x1f, 0, 0, 0, 0, 0], extended)
+    if answer is None:
+        return 0
     return int(256 * answer.data[3] + answer.data[4])
 
 def print_graph(stdscr, win, value, max_value):
@@ -194,6 +214,8 @@ if __name__ in "__main__":
 
         except Exception as e:
             print(e)
-            #break
+            while (1):
+                pass
+            break
 
     clean(stdscr)
