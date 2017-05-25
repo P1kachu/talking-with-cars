@@ -16,6 +16,20 @@ FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
 - Debug arbitration ID: 0x18DB33F1
 
 ## Reverse engineering broadcast message
+0218a006:
+  Gives speed at 4 different but close moments if the car is running. If the
+  car's speed is less than 3 km/h, it gives 4 times '00 2C'
+
+0218a006[0] => Speed1
+0218a006[1] => Speed2
+0218a006[2] => Speed1
+0218a006[3] => Speed2
+0218a006[4] => Speed1
+0218a006[5] => Speed2
+0218a006[6] => Speed1
+0218a006[7] => Speed2
+
+------
 
 0810a000[2] => Rises with force applied on breaks
 
@@ -39,9 +53,23 @@ FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
             ^------------ 6: Contact on
            ^------------- 7: Ignition
 
+0a18a000[7]:
+ Increments on 8 bits
+
 ------
 
 0a18a001[4:5]: rises when electrical components are used (?)
+
+------
+
+0a28a006[2] == 0a28a000[0] => Speed1
+0a28a006[3] == 0a28a000[1] => Speed2
+
+------
+
+0a28a000[0] => Speed1
+0a28a000[1] => Speed2
+0a28a000[3] ?= 0a18a000[7] => Increments on 8 bits
 
 ------
 
