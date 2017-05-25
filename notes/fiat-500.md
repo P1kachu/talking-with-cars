@@ -1,4 +1,5 @@
-## FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
+FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
+===============================================
 
 > http://www.lacentrale.fr/fiche-technique-voiture-fiat-500-ii+c+1.2+8v+69+s%5Es+lounge-2010.html
 > http://www.outilsobdfacile.com/vehicle-list-compatible-obd2/fiat
@@ -14,3 +15,54 @@
 - 500kb/s
 - Debug arbitration ID: 0x18DB33F1
 
+## Reverse engineering broadcast message
+
+0810a000[2] => Rises with force applied on breaks
+
+------
+
+0a18a000[0]:
+0a18a000[6]:
+  0x00 = 0b00000000 => Handbrake off
+  0x20 = 0b00100000 => Handbrake on
+             ^----------- 5: Handbrake on
+
+0a18a000[2]:
+  0x10 = 0b00010000 => Left front door closed, contact off
+  0x18 = 0b00011000 => Left front door opened, contact off
+  0x40 = 0b01000000 => Left front door closed, contact on
+  0x48 = 0b01001000 => Left front door opened, contact on
+  0xC0 = 0b11000000 => Left front door closed, Ignition
+  0xC8 = 0b11001000 => Left front door opened, Ignition
+               ^--------- 3: Left front door opened
+              ^---------- 4: ?
+            ^------------ 6: Contact on
+           ^------------- 7: Ignition
+
+------
+
+0a18a001[4:5]: rises when electrical components are used (?)
+
+------
+
+0c1ca000[2]:
+  0x28 = 0b00101000 => Any front door opened, contact on, Start&Stop unavailable
+  0x2C = 0b00101100 => All front door closed, contact on, Start&Stop unavailable
+  0xC8 = 0b11001000 => Any front door opened, contact on, Start&Stop off
+  0xCC = 0b11001100 => All front door closed, contact on, Start&Stop off
+  0xE8 = 0b11101000 => Any front door opened, contact on, Start&Stop on
+  0xEC = 0b11101100 => All front door closed, contact on, Start&Stop on
+                ^-------- 2: All front door closed
+             ^----------- 5: Start&Stop on
+            ^------------ 6: Start&Stop available
+
+------
+
+0c28a000
+  Date readeable in hexadecimal
+  0c28a000[0]: Hour
+  0c28a000[1]: Minute
+  0c28a000[2]: Day
+  0c28a000[3]: Month
+  0c28a000[4]: Year1
+  0c28a000[5]: Year2
