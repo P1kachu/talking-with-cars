@@ -41,14 +41,16 @@ def can_xchg(bus, arb_id, data, ext=False):
             data=data,
             extended_id=ext)
 
-    bus.send(msg)
-
-    answer = bus.recv(0.1)
+    answer = None
     while not answer or not _is_answer(answer, data):
         # 29bits CAN requires to resend the message until
         # the answer is received.
-        bus.send(msg)
-        answer = bus.recv(0.1)
+        try:
+            bus.send(msg)
+            answer = bus.recv(0.1)
+        except:
+            pass
+
     return answer
 
 def can29_recv(bus, arb_id, byte_nb):
@@ -69,7 +71,7 @@ def get_rpm(bus):
     answer = can_xchg(bus, diagnostic_id, [2, 1, 0xc, 0, 0, 0, 0, 0], extended)
     if answer is None:
         return 0
-    return int((answer.data[3] * 256 + answer.data[4])/4)
+    return (answer.data[3], answer.data[4])
 
 def get_speed(bus):
     answer = can_xchg(bus, diagnostic_id, [2, 1, 0xd, 0, 0, 0, 0, 0], extended)
@@ -81,14 +83,14 @@ def get_throttle_pos(bus):
     answer = can_xchg(bus, diagnostic_id, [2, 1, 0x11, 0, 0, 0, 0, 0], extended)
     if answer is None:
         return 0
-    return int(100 * answer.data[3] / 255)
+    return answer.data[3]
 
 def get_accel_pos(bus):
     #0x49 0x4a 0x4b
     answer = can_xchg(bus, diagnostic_id, [2, 1, 0x49, 0, 0, 0, 0, 0], extended)
     if answer is None:
         return 0
-    return int(100 * answer.data[3] / 255)
+    return answer.data[3]
 
 def get_elapsed_time(bus):
     # 29bits CAN doesn't answer this query. Don't know why
@@ -102,7 +104,7 @@ def get_elapsed_time(bus):
     elapsed_time = int(256 * answer.data[3] + answer.data[4])
     return str(datetime.timedelta(seconds=elapsed_time))
 
-def get_status(bus):
+def get_fiat_status(bus):
     handbrake = "Up" if can29_recv(bus, 0x0a18a000, 0) else "Down"
     misc = can29_recv(bus, 0x0a18a000, 2)
     misc2 = can29_recv(bus, 0x0c1ca000, 2)
@@ -197,32 +199,41 @@ if __name__ in "__main__":
     engine_coolant = 0
     coolant_str = ""
     elapsed_time_str = ""
-    status_str = ""
-    status2_str = ""
+    fiat_status_str = ""
+    fiat_status2_str = ""
+    fiat_brake_str = ""
 
     while 1:
         try:
 
             # RPM
-            rpm = get_rpm(bus)
+            byte_3, byte_4 = get_rpm(bus)
+            rpm = int((byte_3 * 256 + byte_4)/4)
             rpm_str = "RPM:  {0}".format(str(rpm).rjust(4))
+            rpm_str += " ({:02x} {:02x})".format(byte_3, byte_4) # DEBUG
 
             # Vehicle speed
             speed = get_speed(bus)
             speed_str = "Speed: {0} km/h".format(str(speed).rjust(3))
+            speed_str += " ({:02x})".format(speed) # DEBUG
 
             # Throttle position
-            throttle_pos = get_throttle_pos(bus)
+            byte_3 = get_throttle_pos(bus)
+            throttle_pos = int(100 * byte_3 / 255)
             throttle_str = "Throttle position: {0}%".format(str(throttle_pos).rjust(3))
+            throttle_str += " ({:02x})".format(byte_3) # DEBUG
 
             # Accelerator pedal position
-            accel_pos = get_accel_pos(bus)
+            byte_3 = get_accel_pos(bus)
+            accel_pos = int(100 * byte_3 / 255)
             accel_str = "Accelerator pedal position: {0}%".format(str(accel_pos).rjust(3))
+            accel_str += " ({:02x})".format(byte_3) # DEBUG
 
             if tmp_inc % 60 == 0:
                 # Engine coolant temperature
                 engine_coolant = get_coolant_temp(bus)
                 coolant_str = "Engine coolant temperature: {0}ºC".format(str(engine_coolant).rjust(2))
+                coolant_str += " ({:02x})".format(engine_coolant) # DEBUG
 
                 # Elapsed time since engine started
                 elapsed_time = get_elapsed_time(bus)
@@ -230,14 +241,20 @@ if __name__ in "__main__":
 
                 tmp_inc = 0
 
-            if diagnostic_id == can_29bits_diagnostic_id and tmp_inc % 5 == 0:
-                handbrake_sts, engine_sts, start_stop_sts, doors_sts = get_status(bus)
-                status_str = ""
-                status2_str = ""
-                status_str += "Handbrake: {0} - ".format(handbrake_sts)
-                status_str += "Start&Stop {0}".format(start_stop_sts)
-                status2_str += "Engine: {0} - ".format(engine_sts)
-                status2_str += "{0}".format(doors_sts)
+            if diagnostic_id == can_29bits_diagnostic_id: # Fiat 500 only
+                if tmp_inc % 5 == 0:
+                    handbrake_sts, engine_sts, start_stop_sts, doors_sts = get_fiat_status(bus)
+                    fiat_status_str = ""
+                    fiat_status2_str = ""
+                    fiat_status_str += "Handbrake: {0} - ".format(handbrake_sts)
+                    fiat_status_str += "Start&Stop {0}".format(start_stop_sts)
+                    fiat_status2_str += "Engine: {0} - ".format(engine_sts)
+                    fiat_status2_str += "{0}".format(doors_sts)
+                byte_fiat_brake= can29_recv(bus, 0x0810a000, 2)
+                fiat_brake_pos = int(100 * byte_fiat_brake / 255)
+                fiat_brake_str = "Brake pedal position: {0}%".format(str(fiat_brake_pos).rjust(3))
+                fiat_brake_str += " ({:02x})".format(byte_fiat_brake) # DEBUG
+
 
             tmp_inc += 1
 
@@ -249,8 +266,9 @@ if __name__ in "__main__":
             left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, throttle_str); elt += 1
             left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, accel_str); elt += 1
             left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, elapsed_time_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, status_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, status2_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, fiat_status_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, fiat_status2_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, fiat_brake_str); elt += 1
             left.refresh()
 
             print_graph(stdscr, middle, speed, max_speed)
