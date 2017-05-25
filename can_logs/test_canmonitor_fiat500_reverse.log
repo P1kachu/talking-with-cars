@@ -50,12 +50,20 @@ D Bytes Text
 ------
 
 0c1ca000[2]:
+  0x28 = 0b00101000 => Any front door opened, contact on, Start&Stop unavailable
+  0x2C = 0b00101100 => All front door closed, contact on, Start&Stop unavailable
   0xC8 = 0b11001000 => Any front door opened, contact on, Start&Stop off
   0xCC = 0b11001100 => All front door closed, contact on, Start&Stop off
   0xE8 = 0b11101000 => Any front door opened, contact on, Start&Stop on
   0xEC = 0b11101100 => All front door closed, contact on, Start&Stop on
                 ^-------- 2: All front door closed
              ^----------- 5: Start&Stop on
+            ^------------ 6: Start&Stop available
 
+------
 
 0a18a001[4:5]: rises when electrical components are used (?)
+
+------
+
+0c28a000[1]: Increment each minute (?)

@@ -3,9 +3,10 @@
 import curses
 import can
 import datetime
+from math import floor
 
 # Constants
-nb_elts = 8
+nb_elts = 16
 y_pad = 2
 x_pad = 2
 max_rpm = 6000  # In practice, not in theory
@@ -50,6 +51,14 @@ def can_xchg(bus, arb_id, data, ext=False):
         answer = bus.recv(0.1)
     return answer
 
+def can29_recv(bus, arb_id, byte_nb):
+    answer = bus.recv(0.1)
+
+    while answer.arbitration_id != arb_id or len(answer.data) <= byte_nb:
+        answer = bus.recv(0.1)
+
+    return answer.data[byte_nb]
+
 def get_coolant_temp(bus):
     answer = can_xchg(bus, diagnostic_id, [2, 1, 5, 0, 0, 0, 0, 0], extended)
     if answer is None:
@@ -84,12 +93,34 @@ def get_accel_pos(bus):
 def get_elapsed_time(bus):
     # 29bits CAN doesn't answer this query. Don't know why
     if diagnostic_id == can_29bits_diagnostic_id:
-        return 0
+        return "N/A"
 
     answer = can_xchg(bus, diagnostic_id, [2, 1, 0x1f, 0, 0, 0, 0, 0], extended)
     if answer is None:
-        return 0
-    return int(256 * answer.data[3] + answer.data[4])
+        return "N/A"
+
+    elapsed_time = int(256 * answer.data[3] + answer.data[4])
+    return str(datetime.timedelta(seconds=elapsed_time))
+
+def get_status(bus):
+    handbrake = "Up" if can29_recv(bus, 0x0a18a000, 0) else "Down"
+    misc = can29_recv(bus, 0x0a18a000, 2)
+    misc2 = can29_recv(bus, 0x0c1ca000, 2)
+
+    engine = "Ignition" if (misc >> 7) else ("On" if (misc >> 6) else "Off")
+    start_stop = "unavailable" if not ((misc2 >> 6) & 1) else ("activated" if (misc2 >> 5) & 1 else "deactivated")
+    doors = ""
+
+    if not (misc2 >> 2) & 1:
+        if (misc >> 3) & 1:
+            doors = "Left door opened"
+        else:
+            doors = "Right or both doors opened" # Or maybe both, check that
+    else:
+        doors = "Doors closed"
+
+    return (handbrake, engine, start_stop, doors)
+
 
 def print_graph(stdscr, win, value, max_value):
     h,w = win.getmaxyx()
@@ -166,6 +197,8 @@ if __name__ in "__main__":
     engine_coolant = 0
     coolant_str = ""
     elapsed_time_str = ""
+    status_str = ""
+    status2_str = ""
 
     while 1:
         try:
@@ -193,20 +226,31 @@ if __name__ in "__main__":
 
                 # Elapsed time since engine started
                 elapsed_time = get_elapsed_time(bus)
-                elapsed_time = str(datetime.timedelta(seconds=elapsed_time))
                 elapsed_time_str = "Elapsed time since engine started: {0}".format(str(elapsed_time).rjust(6))
 
                 tmp_inc = 0
+
+            if diagnostic_id == can_29bits_diagnostic_id and tmp_inc % 5 == 0:
+                handbrake_sts, engine_sts, start_stop_sts, doors_sts = get_status(bus)
+                status_str = ""
+                status2_str = ""
+                status_str += "Handbrake: {0} - ".format(handbrake_sts)
+                status_str += "Start&Stop {0}".format(start_stop_sts)
+                status2_str += "Engine: {0} - ".format(engine_sts)
+                status2_str += "{0}".format(doors_sts)
+
             tmp_inc += 1
 
             elt = 0
             left.clear()
-            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, rpm_str); elt += 1
-            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, speed_str); elt += 1
-            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, coolant_str); elt += 1
-            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, throttle_str); elt += 1
-            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, accel_str); elt += 1
-            left.addstr(int(y_pad + elt * h/nb_elts), x_pad, elapsed_time_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, rpm_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, speed_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, coolant_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, throttle_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, accel_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, elapsed_time_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, status_str); elt += 1
+            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, status2_str); elt += 1
             left.refresh()
 
             print_graph(stdscr, middle, speed, max_speed)
