@@ -16,9 +16,10 @@ FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
 - Debug arbitration ID: 0x18DB33F1
 
 ## Reverse engineering broadcast message
-0218a006:
-  Gives speed at 4 different but close moments if the car is running. If the
-  car's speed is less than 3 km/h, it gives 4 times '00 2C'
+
+### 0218a006
+Gives speed at 4 different but close moments if the car is running. If the
+car's speed is less than 3 km/h, it gives 4 times '00 2C'
 
 0218a006[0] => Speed1
 0218a006[1] => Speed2
@@ -29,14 +30,13 @@ FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
 0218a006[6] => Speed1
 0218a006[7] => Speed2
 
-------
-
+### 0810a000
 0810a000[2] => Rises with force applied on breaks
 
-------
+### 0a18a000
+Seems to convey status bitfields
 
 0a18a000[0]:
-0a18a000[6]:
   0x00 = 0b00000000 => Handbrake off
   0x20 = 0b00100000 => Handbrake on
              ^----------- 5: Handbrake on
@@ -53,26 +53,25 @@ FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
             ^------------ 6: Contact on
            ^------------- 7: Ignition
 
+0a18a000[6]:
+  Same as byte 0
+
 0a18a000[7]:
- Increments on 8 bits
+  Increments on 8 bits when the wheels are turning
 
-------
-
+### 0a18a001
 0a18a001[4:5]: rises when electrical components are used (?)
 
-------
+### 0a28a000
+0a28a000[0] => Speed1
+0a28a000[1] => Speed2
+0a28a000[3] ?= 0a18a000[7] => Increments on 8 bits when wheels are turning
 
+### 0a28a006
 0a28a006[2] == 0a28a000[0] => Speed1
 0a28a006[3] == 0a28a000[1] => Speed2
 
-------
-
-0a28a000[0] => Speed1
-0a28a000[1] => Speed2
-0a28a000[3] ?= 0a18a000[7] => Increments on 8 bits
-
-------
-
+### 0c1ca000
 0c1ca000[2]:
   0x28 = 0b00101000 => Any front door opened, contact on, Start&Stop unavailable
   0x2C = 0b00101100 => All front door closed, contact on, Start&Stop unavailable
@@ -84,13 +83,16 @@ FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
              ^----------- 5: Start&Stop on
             ^------------ 6: Start&Stop available
 
-------
 
-0c28a000
-  Date readeable in hexadecimal
-  0c28a000[0]: Hour
-  0c28a000[1]: Minute
-  0c28a000[2]: Day
-  0c28a000[3]: Month
-  0c28a000[4]: Year1
-  0c28a000[5]: Year2
+### 0c28a000
+Date readeable in hexadecimal
+0c28a000[0]: Hour
+0c28a000[1]: Minute
+0c28a000[2]: Day
+0c28a000[3]: Month
+0c28a000[4]: Year1
+0c28a000[5]: Year2
+
+Example:
+> 0c28a000     21 02 24 05 20 17
+> May, 24th 2017 - 9:02PM
