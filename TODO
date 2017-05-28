@@ -1,5 +1,15 @@
+Polo:
 - Try timing attack
 - Try different actions when requesting readByCommonIdentifier
 - Try readByLocalIdentifier
 - Try different ECUs for ^
 - Try different security access levels
+
+Fiat:
+- Verify suppositions for 0618a001, 0628a001
+- Toggle:
+  - Radio channel
+  - Radio vs ipod
+  - Windows
+  - Clutch pedal
+  - Brake pedal
