@@ -23,6 +23,8 @@ of their meanings. Output example can be found in
 
 Terms used here:
   - RWH: Rear window heater (defogger)
+  - SS: Start&Stop
+  - SB: Driver's seatbelt
   - Speed:
     Speed1: High byte of speed (>= 0x10)
     Speed2: Low byte of speed (< 0x10, and one digit after coma)
@@ -62,7 +64,11 @@ Gas consumption ?
 
 
 ### 0810a000
-0810a000[2] => Rises with force applied on breaks. Real meaning unknown
+0810a000[2] => Rises with force applied on brakes. Real meaning unknown
+0810a000[2]:
+  0x1x: Brakes pedal released
+  0x3x: Brakes pedal being released
+  0x7x: Brakes pedal being depressed
 
 ### 0a18a000
 Seems to convey status bitfields
@@ -124,15 +130,16 @@ unkown
 
 ### 0c1ca000
 0c1ca000[2]:
-  0x28 = 0b00101000 => Any front door opened, contact on, Start&Stop unavailable
-  0x2C = 0b00101100 => All front door closed, contact on, Start&Stop unavailable
-  0xC8 = 0b11001000 => Any front door opened, contact on, Start&Stop off
-  0xCC = 0b11001100 => All front door closed, contact on, Start&Stop off
-  0xE8 = 0b11101000 => Any front door opened, contact on, Start&Stop on
-  0xEC = 0b11101100 => All front door closed, contact on, Start&Stop on
-                ^-------- 2: All front door closed
-             ^----------- 5: Start&Stop on
-            ^------------ 6: Start&Stop available
+  0x28 = 0b00101000 => Any front door opened and SB disengaged, SS unavailable
+  0x2C = 0b00101100 => All front door closed or  SB    engaged, SS unavailable
+  0xC8 = 0b11001000 => Any front door opened and SB disengaged, SS off
+  0xCC = 0b11001100 => All front door closed or  SB    engaged, SS off
+  0xE8 = 0b11101000 => Any front door opened and SB disengaged, SS on
+  0xEC = 0b11101100 => All front door closed or  SB    engaged, SS on
+                ^-------- 2: All front door closed or SB engaged
+             ^----------- 5: SS on
+            ^------------ 6: SS available (?)
+           ^------------- 7: SS available (?)
 
 
 ### 0c28a000

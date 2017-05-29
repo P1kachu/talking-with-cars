@@ -6,10 +6,13 @@ Polo:
 - Try different security access levels
 
 Fiat:
-- Verify suppositions for 0618a001, 0628a001
+- Verify suppositions for 0618a001, 0628a001, 0810a000, 0c1ca000
 - Toggle:
   - Radio channel
   - Radio vs ipod
   - Windows
   - Clutch pedal
   - Brake pedal
+  - Wheel
+  - Drive at slow constant speed
+  - Accelerate in neutral (constant)
