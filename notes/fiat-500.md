@@ -35,7 +35,7 @@ Terms used here:
 
 ### 0218a006
 Gives speed at 4 different but close moments if the car is running. If the
-car's speed is less than 3 km/h, it gives 4 times '00 2C'
+car's speed is less than 4 km/h, it gives 4 times '00 2C'
 
 0218a006[0] => Speed1
 0218a006[1] => Speed2
