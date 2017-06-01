@@ -46,12 +46,6 @@ car's speed is less than 3 km/h, it gives 4 times '00 2C'
 0218a006[6] => Speed1
 0218a006[7] => Speed2
 
-### 0618a001
-
-> Suppositions, need to be verified
-
-- Some consumption ?
-
 ### 0810a000
 0810a000[2] => Rises with force applied on brakes. Real meaning unknown. ABS
                trigger ?
