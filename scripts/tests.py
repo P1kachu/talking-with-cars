@@ -97,3 +97,13 @@ for i in range(0xffffff):
     #    print("Response received for PID {0}: {1}".format(i, msg))
     #    break
 '''
+
+polo_id_data_mappings = {
+        0x0210a006: [0x06, 0x00, 0x06, 0x00, 0x06, 0x00, 0x06, 0x00]
+        0x0a28a000: [0x06, 0x00, 0x00, 0x00],
+        }
+for i in range(0xffff):
+    arb_id = 0x0a28a000
+    data = polo_id_data_mappings[arb_id]
+    msg = can.Message(arbitration_id=arb_id, data=data, extended_id=True)
+    bus.send(msg)

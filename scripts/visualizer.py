@@ -15,7 +15,7 @@ can_11bits_diagnostic_id = 0x7df      # Classic 11bits CAN ID
 can_29bits_diagnostic_id = 0x18DB33F1 # FIAT 500 (29bits) CAN ID
 
 # CAN parameters
-INTERFACE='can0'
+INTERFACE='vcan0'
 diagnostic_id = can_29bits_diagnostic_id # 29bits -> Fiat 500 / 11bits -> VW Polo
 extended = (diagnostic_id == can_29bits_diagnostic_id)
 
@@ -56,7 +56,7 @@ def can_xchg(bus, arb_id, data, ext=False):
 def can29_recv(bus, arb_id, byte_nb):
     answer = bus.recv(0.1)
 
-    while answer.arbitration_id != arb_id or len(answer.data) <= byte_nb:
+    while not answer or answer.arbitration_id != arb_id or len(answer.data) <= byte_nb:
         answer = bus.recv(0.1)
 
     return answer.data[byte_nb]
@@ -155,6 +155,62 @@ def print_graph(stdscr, win, value, max_value):
     stdscr.move(0,0)
     win.refresh()
 
+def fiat_print_pedals(stdscr, win, bus):
+    h,w = win.getmaxyx()
+    y,x = win.getbegyx()
+    max_pedal_width = int(w / 3 - 1)
+
+    win.clear()
+    pedals_str = " Pedals "
+    padding = int(w / 2 - len(pedals_str) / 2)
+    font = curses.color_pair(0)
+    win.addstr(0, 0, "*" * padding + pedals_str + "*" * padding, font)
+
+
+    left_pad = int(w / 15)
+    # Clutch pedal byte can have values 0x00, 0x10, 0x20, 0x30
+    # We are only interested in the 0x00 and 0x20
+    clutch_p = can29_recv(bus, 0x0628a001, 5)
+    clutch_p = min(int(clutch_p / 0x10), 2) & 0b10
+    try:
+        color = curses.color_pair(clutch_p)
+        for str_y in range(2, y - h - 5):
+            win.addstr(str_y + 1, left_pad, "*" * int(max_pedal_width / 2), color)
+    except Exception as e:
+        clean(stdscr)
+        print(e)
+        exit()
+
+    # Brake pedal byte can have values:
+    #   0b001xxxx
+    #   0b011xxxx
+    #   0b111xxxx
+    brake_p = can29_recv(bus, 0x0810a000, 2)
+    brake_p = bin(brake_p >> 4).count("1") - 1
+    try:
+        color = curses.color_pair(brake_p)
+        for str_y in range(2, y - h - 4):
+            win.addstr(str_y + 1, max_pedal_width + left_pad, "*" * int(max_pedal_width * 2/3 - 2), color)
+    except Exception as e:
+        clean(stdscr)
+        print(e)
+        exit()
+
+    # Accelerator pedal value in percents
+    accel_p = get_accel_pos(bus)
+    accel_p = accel_p / 255
+    try:
+        color = curses.color_pair(min(int(4 * accel_p + 0), 4))
+        for str_y in range(2, y - h - 2):
+            win.addstr(str_y + 1, 2 * max_pedal_width + left_pad, "*" * int(max_pedal_width* 2/3 - 2), color)
+    except Exception as e:
+        clean(stdscr)
+        print(e)
+        exit()
+
+
+    win.refresh()
+
 
 def init():
     stdscr = curses.initscr()
@@ -186,14 +242,13 @@ if __name__ in "__main__":
     stdscr = init()
     (h, w) = stdscr.getmaxyx()
 
-    # Info, half the screen (left)
-    left  = curses.newwin(h, int(w * 2 / 4), 0, 0)
+    #                    height, width, y, x
+    left = curses.newwin(h, int(w / 4) - 3, 0, 0)
 
-    # Speed (1/4th of the screen, middle)
-    middle = curses.newwin(h, int(w / 4) - 3, 0, int(2 / 4 * w))
+    infos_win = curses.newwin(int(h * 2 / 3) - 3, int(w / 2) - 4, 0, int(w / 4) + 2)
+    pedals_win = curses.newwin(int(h / 3), int(w / 2) - 4, int(h * 2 / 3), int(w / 4) + 2)
 
-    # RPM (1/4th of the screen, right)
-    right = curses.newwin(h, int(w / 4) - 3, 0, int(3 / 4 * w))
+    right = curses.newwin(h, int(w / 4) - 3, 0, int(w * 3 / 4))
 
     tmp_inc = 0
     engine_coolant = 0
@@ -201,7 +256,6 @@ if __name__ in "__main__":
     elapsed_time_str = ""
     fiat_status_str = ""
     fiat_status2_str = ""
-    fiat_brake_str = ""
 
     while 1:
         try:
@@ -250,28 +304,24 @@ if __name__ in "__main__":
                     fiat_status_str += "Start&Stop {0}".format(start_stop_sts)
                     fiat_status2_str += "Engine: {0} - ".format(engine_sts)
                     fiat_status2_str += "{0}".format(doors_sts)
-                byte_fiat_brake= can29_recv(bus, 0x0810a000, 2)
-                fiat_brake_pos = int(100 * byte_fiat_brake / 255)
-                fiat_brake_str = "Brake pedal position: {0}%".format(str(fiat_brake_pos).rjust(3))
-                fiat_brake_str += " ({:02x})".format(byte_fiat_brake) # DEBUG
+                fiat_print_pedals(stdscr, pedals_win, bus)
 
 
             tmp_inc += 1
 
-            elt = 0
-            left.clear()
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, rpm_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, speed_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, coolant_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, throttle_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, accel_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, elapsed_time_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, fiat_status_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, fiat_status2_str); elt += 1
-            left.addstr(int(y_pad + elt * floor(h/nb_elts)), x_pad, fiat_brake_str); elt += 1
-            left.refresh()
+            i = 0
+            infos_win.clear()
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, rpm_str); i += 1
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, speed_str); i += 1
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, coolant_str); i += 1
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, throttle_str); i += 1
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, accel_str); i += 1
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, elapsed_time_str); i += 1
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fiat_status_str); i += 1
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fiat_status2_str); i += 1
+            infos_win.refresh()
 
-            print_graph(stdscr, middle, speed, max_speed)
+            print_graph(stdscr, left, speed, max_speed)
             print_graph(stdscr, right, rpm, max_rpm)
 
         except Exception as e:
