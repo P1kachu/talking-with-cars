@@ -53,11 +53,12 @@ car's speed is less than 3 km/h, it gives 4 times '00 2C'
 - Some consumption ?
 
 ### 0810a000
-0810a000[2] => Rises with force applied on brakes. Real meaning unknown
+0810a000[2] => Rises with force applied on brakes. Real meaning unknown. ABS
+               trigger ?
 0810a000[2]:
-  0x1x: Brakes pedal released
-  0x3x: Brakes pedal being released
-  0x7x: Brakes pedal being depressed
+  0x1x: Brakes pedal slightly depressed or released
+  0x3x: Brakes pedal normal depression
+  0x7x: Brakes pedal high depression
 
 ### 0a18a000
 Seems to convey status bitfields
