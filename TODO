@@ -7,4 +7,7 @@ Polo:
 
 Fiat:
   - Test 0a18a000[6], 0x10
-  - Drive at slow constant speed
+  - Verify everything
+  - Try kwp/iso-tp/etc connection
+  - Try some CAN injection
+  - Drive at slow constant speed, to check values
