@@ -6,6 +6,9 @@ Polo:
 - Try different security access levels
 
 Fiat:
-  - Try kwp/iso-tp/etc connection
-  - Try some CAN injection
+  - Verify visualizer
   - Test parking radar
+  - Try some CAN injection
+  - Try kwp/iso-tp/etc connection
+
+
