@@ -50,18 +50,7 @@ car's speed is less than 3 km/h, it gives 4 times '00 2C'
 
 > Suppositions, need to be verified
 
-Gas consumption ?
-
-0618a001[5]:
-  0x23 = 0b100011 => RWH off, both windows opened, radio off
-  0x24 = 0b100100 => RWH off, both windows closed, radio off
-  0x25 = 0b100101 => RWH off, both windows closed, radio on
-  0x2C = 0b101100 => RWH on, both windows closed, radio off
-                ^------ 0: Windows opened (Left)
-               ^------- 1: Windows opened (Right)
-              ^-------- 2: Both windows closed ?
-             ^--------- 3: RWH on
-
+- Some consumption ?
 
 ### 0810a000
 0810a000[2] => Rises with force applied on brakes. Real meaning unknown
