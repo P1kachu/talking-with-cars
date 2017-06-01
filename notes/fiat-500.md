@@ -64,8 +64,8 @@ car's speed is less than 3 km/h, it gives 4 times '00 2C'
 Seems to convey status bitfields
 
 0a18a000[0]:
-  0x00 = 0b00000000 => Handbrake off, RWH off
-  0x20 = 0b00100000 => Handbrake on, RWH off
+  0x00 = 0b00000000 => Handbrake off
+  0x20 = 0b00100000 => Handbrake on
              ^----------- 5: Handbrake on
 
 0a18a000[2]:
@@ -99,8 +99,8 @@ unkown
 0a181006[1] => Always 00. Real meaning unknown
 0a181006[2] => Speed1
 0a181006[3] => Speed2
-0a181006[4:5] => Loops from 0x0000 to 0x1fff when car is running. Real meaning
-0a181006[6:7] => unknown
+0a181006[4:5] => Like [6:7] but with different values: loops from 0x0000 to
+0a181006[6:7]    0x1fff when car is running. Real meaning unknown
 
 ### 0a28a000
 0a28a000[0] => Speed1
