@@ -6,8 +6,7 @@ Polo:
 - Try different security access levels
 
 Fiat:
-  - Test 0a18a000[6], 0x10
-  - Verify everything
   - Try kwp/iso-tp/etc connection
   - Try some CAN injection
+  - Test parking radar
   - Drive at slow constant speed, to check values

@@ -46,13 +46,21 @@ car's speed is less than 4 km/h, it gives 4 times '00 2C'
 0218a006[6] => Speed1
 0218a006[7] => Speed2
 
+### 0628a001
+0628a001[5]:
+  0x00 = 0b000000 => Clutch pedal released
+  0x10 = 0b010000 => Accelerating with clutch pedal released enough to engage
+  0x20 = 0b100000 => Depressing clutch pedal without accelerating
+  0x30 = 0b110000 => Acceleration with clutch pedal too depressed to engage
+
+
 ### 0810a000
 0810a000[2] => Rises with force applied on brakes. Real meaning unknown. ABS
                trigger ?
 0810a000[2]:
-  0x1x: Brakes pedal slightly depressed or released
-  0x3x: Brakes pedal normal depression
-  0x7x: Brakes pedal high depression
+  0x1x: Brakes pedal almost or completely released (brake lights off)
+  0x3x: Brakes pedal slight depression (brake lights turn on)
+  0x7x: Brakes pedal normal/high depression
 
 ### 0a18a000
 Seems to convey status bitfields
@@ -65,8 +73,8 @@ Seems to convey status bitfields
 0a18a000[2]:
   0x10 = 0b00010000 => Left front door closed, contact off
   0x18 = 0b00011000 => Left front door opened, contact off
-  0x40 = 0b01000000 => Left front door closed, contact on
-  0x48 = 0b01001000 => Left front door opened, contact on
+  0x40 = 0b01000000 => Left front door closed, contact on (=> electricity flows)
+  0x48 = 0b01001000 => Left front door opened, contact on (=> electricity flows)
   0xC0 = 0b11000000 => Left front door closed, Ignition
   0xC8 = 0b11001000 => Left front door opened, Ignition
                ^--------- 3: Left front door opened
@@ -76,6 +84,7 @@ Seems to convey status bitfields
 
 0a18a000[6]:
   0x00 = 0b00000000 => Handbrake off, RWH off
+  0x10 = 0b00000000 => Handbrake off, RWH on
   0x20 = 0b00100000 => Handbrake on, RWH off
   0x30 = 0b00110000 => Handbrake on, RWH on
               ^---------- 4: RWH on
@@ -88,25 +97,18 @@ Seems to convey status bitfields
 0a18a001[4:5]: Seems to rise when electrical components are used. Real meaning
 unkown
 
-### 0a181006
-0a181006[0] => 00 when engine is off, 01 otherwise (seems)
-0a181006[1] => Always 00. Real meaning unknown
-0a181006[2] => Speed1
-0a181006[3] => Speed2
-0a181006[4:5] => Like [6:7] but with different values: loops from 0x0000 to
-0a181006[6:7]    0x1fff when car is running. Real meaning unknown
+### 0a18a006
+0a18a006[0] => 00 when engine is off, 01 otherwise (seems). Set at ignition
+0a18a006[1] => Always 00. Real meaning unknown
+0a18a006[2] => Speed1
+0a18a006[3] => Speed2
+0a18a006[4:5] => Like [6:7] but with different values: loops from 0x0000 to
+0a18a006[6:7]    0x1fff when car is running. Real meaning unknown
 
 ### 0a28a000
 0a28a000[0] => Speed1
 0a28a000[1] => Speed2
 0a28a000[3] ?= 0a18a000[7] => Increments on 8 bits when wheels are turning
-
-### 0628a001
-0628a001[5]:
-  0x00 = 0b000000 => Clutch pedal released
-  0x10 = 0b010000 => Accelerating with clutch pedal released enough to engage
-  0x20 = 0b100000 => Depressing clutch pedal without accelerating
-  0x30 = 0b110000 => Acceleration with clutch pedal too depressed to engage
 
 ### 0a28a006
 0a28a006[2] => Speed1
