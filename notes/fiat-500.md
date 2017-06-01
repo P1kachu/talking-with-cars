@@ -109,10 +109,10 @@ unkown
 
 ### 0628a001
 0628a001[5]:
-  0x00 = 0b000000 => Clutch pedal released, Gearbox in neutral
-  0x10 = 0b010000 => Clutch pedal released, some gear engaged
-  0x20 = 0b100000 => Depressing clutch pedal
-  0x30 = 0b110000 => Releasing clutch pedal
+  0x00 = 0b000000 => Clutch pedal released
+  0x10 = 0b010000 => Accelerating with clutch pedal released enough to engage
+  0x20 = 0b100000 => Depressing clutch pedal without accelerating
+  0x30 = 0b110000 => Acceleration with clutch pedal too depressed to engage
 
 ### 0a28a006
 0a28a006[2] => Speed1
@@ -128,7 +128,7 @@ unkown
   0xEC = 0b11101100 => All front door closed or  SB    engaged, SS on
                 ^-------- 2: All front door closed or SB engaged
              ^----------- 5: SS on
-            ^------------ 6: SS available (?)
+            ^------------ 6: SS available   )
            ^------------- 7: SS available (?)
 
 
