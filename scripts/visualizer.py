@@ -3,7 +3,7 @@
 import curses
 import can
 import datetime
-from math import floor
+from math import floor, ceil
 
 # Constants
 nb_elts = 16
@@ -15,7 +15,7 @@ can_11bits_diagnostic_id = 0x7df      # Classic 11bits CAN ID
 can_29bits_diagnostic_id = 0x18DB33F1 # FIAT 500 (29bits) CAN ID
 
 # CAN parameters
-INTERFACE='vcan0'
+INTERFACE='can0'
 diagnostic_id = can_29bits_diagnostic_id # 29bits -> Fiat 500 / 11bits -> VW Polo
 extended = (diagnostic_id == can_29bits_diagnostic_id)
 
@@ -159,22 +159,22 @@ def fiat_print_pedals(stdscr, win, bus):
     h,w = win.getmaxyx()
     y,x = win.getbegyx()
     max_pedal_width = int(w / 3 - 1)
+    left_pad = int(w / 15)
 
     win.clear()
+
     pedals_str = " Pedals "
     padding = int(w / 2 - len(pedals_str) / 2)
     font = curses.color_pair(0)
     win.addstr(0, 0, "*" * padding + pedals_str + "*" * padding, font)
 
-
-    left_pad = int(w / 15)
     # Clutch pedal byte can have values 0x00, 0x10, 0x20, 0x30
     # We are only interested in the 0x00 and 0x20
     clutch_p = can29_recv(bus, 0x0628a001, 5)
     clutch_p = min(int(clutch_p / 0x10), 2) & 0b10
     try:
         color = curses.color_pair(clutch_p)
-        for str_y in range(2, y - h - 5):
+        for str_y in range(2, y - h - 3):
             win.addstr(str_y + 1, left_pad, "*" * int(max_pedal_width / 2), color)
     except Exception as e:
         clean(stdscr)
@@ -187,9 +187,10 @@ def fiat_print_pedals(stdscr, win, bus):
     #   0b111xxxx
     brake_p = can29_recv(bus, 0x0810a000, 2)
     brake_p = bin(brake_p >> 4).count("1") - 1
+    if brake_p is not 0: brake_p += 1
     try:
         color = curses.color_pair(brake_p)
-        for str_y in range(2, y - h - 4):
+        for str_y in range(2, y - h - 2):
             win.addstr(str_y + 1, max_pedal_width + left_pad, "*" * int(max_pedal_width * 2/3 - 2), color)
     except Exception as e:
         clean(stdscr)
@@ -197,11 +198,13 @@ def fiat_print_pedals(stdscr, win, bus):
         exit()
 
     # Accelerator pedal value in percents
+    # 0x26 is the value returned when the 
+    # accelerator is released
     accel_p = get_accel_pos(bus)
-    accel_p = accel_p / 255
+    accel_p = (accel_p - 0x26) / 255 
     try:
-        color = curses.color_pair(min(int(4 * accel_p + 0), 4))
-        for str_y in range(2, y - h - 2):
+        color = curses.color_pair(min(ceil(4 * accel_p), 4))
+        for str_y in range(2, y - h - 1):
             win.addstr(str_y + 1, 2 * max_pedal_width + left_pad, "*" * int(max_pedal_width* 2/3 - 2), color)
     except Exception as e:
         clean(stdscr)
@@ -256,6 +259,7 @@ if __name__ in "__main__":
     elapsed_time_str = ""
     fiat_status_str = ""
     fiat_status2_str = ""
+    fiat_engine_on = False
 
     while 1:
         try:
@@ -304,7 +308,16 @@ if __name__ in "__main__":
                     fiat_status_str += "Start&Stop {0}".format(start_stop_sts)
                     fiat_status2_str += "Engine: {0} - ".format(engine_sts)
                     fiat_status2_str += "{0}".format(doors_sts)
-                fiat_print_pedals(stdscr, pedals_win, bus)
+                    if engine_sts is not "Off":
+                        fiat_engine_on = True
+                    else:
+                        fiat_engine_on = False
+                        pedals_win.clear()
+                        pedals_win.refresh()
+
+
+                if fiat_engine_on:
+                    fiat_print_pedals(stdscr, pedals_win, bus)
 
 
             tmp_inc += 1
@@ -317,8 +330,9 @@ if __name__ in "__main__":
             infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, throttle_str); i += 1
             infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, accel_str); i += 1
             infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, elapsed_time_str); i += 1
-            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fiat_status_str); i += 1
-            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fiat_status2_str); i += 1
+            if fiat_engine_on:
+                infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fiat_status_str); i += 1
+                infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fiat_status2_str); i += 1
             infos_win.refresh()
 
             print_graph(stdscr, left, speed, max_speed)
