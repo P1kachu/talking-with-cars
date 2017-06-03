@@ -104,6 +104,13 @@ def get_elapsed_time(bus):
     elapsed_time = int(256 * answer.data[3] + answer.data[4])
     return str(datetime.timedelta(seconds=elapsed_time))
 
+def get_fuel_level(bus):
+    answer = can_xchg(bus, diagnostic_id, [2, 1, 0x2f, 0, 0, 0, 0, 0], extended)
+    if answer is None:
+        return 0
+
+    return answer.data[3]
+
 def get_fiat_status(bus):
     handbrake = "Up" if can29_recv(bus, 0x0a18a000, 0) else "Down"
     misc = can29_recv(bus, 0x0a18a000, 2)
@@ -141,8 +148,10 @@ def print_graph(stdscr, win, value, max_value):
         length = len(str(value))
         maxi = max(current_top - 1, 0)
         win.addstr(maxi, int(w / 2 - length / 2), str(value), font)
-    except:
+    except Exception as e:
         clean(stdscr)
+        print("print_graph 1: {0}".format(e))
+        print("Reducing font size of enhancing window size may fix the issue")
         exit()
 
     try:
@@ -150,6 +159,8 @@ def print_graph(stdscr, win, value, max_value):
             win.addstr(y, 0, "_" * w, color)
     except:
         clean(stdscr)
+        print("print_graph 2: {0}".format(e))
+        print("Reducing font size of enhancing window size may fix the issue")
         exit()
 
     stdscr.move(0,0)
@@ -178,7 +189,8 @@ def fiat_print_pedals(stdscr, win, bus):
             win.addstr(str_y + 1, left_pad, "*" * int(max_pedal_width / 2), color)
     except Exception as e:
         clean(stdscr)
-        print(e)
+        print("fiat_print_pedals 1: {0}".format(e))
+        print("Reducing font size of enhancing window size may fix the issue")
         exit()
 
     # Brake pedal byte can have values:
@@ -194,21 +206,23 @@ def fiat_print_pedals(stdscr, win, bus):
             win.addstr(str_y + 1, max_pedal_width + left_pad, "*" * int(max_pedal_width * 2/3 - 2), color)
     except Exception as e:
         clean(stdscr)
-        print(e)
+        print("fiat_print_pedals 2: {0}".format(e))
+        print("Reducing font size of enhancing window size may fix the issue")
         exit()
 
     # Accelerator pedal value in percents
-    # 0x26 is the value returned when the 
+    # 0x26 is the value returned when the
     # accelerator is released
     accel_p = get_accel_pos(bus)
-    accel_p = (accel_p - 0x26) / 255 
+    accel_p = (accel_p - 0x26) / 255
     try:
         color = curses.color_pair(min(ceil(4 * accel_p), 4))
         for str_y in range(2, y - h - 1):
             win.addstr(str_y + 1, 2 * max_pedal_width + left_pad, "*" * int(max_pedal_width* 2/3 - 2), color)
     except Exception as e:
         clean(stdscr)
-        print(e)
+        print("fiat_print_pedals 3: {0}".format(e))
+        print("Reducing font size of enhancing window size may fix the issue")
         exit()
 
 
@@ -251,7 +265,7 @@ if __name__ in "__main__":
     infos_win = curses.newwin(int(h * 2 / 3) - 3, int(w / 2) - 4, 0, int(w / 4) + 2)
     pedals_win = curses.newwin(int(h / 3), int(w / 2) - 4, int(h * 2 / 3), int(w / 4) + 2)
 
-    right = curses.newwin(h, int(w / 4) - 3, 0, int(w * 3 / 4))
+    right = curses.newwin(h, int(w / 4) - 4, 0, int(w * 3 / 4) + 2)
 
     tmp_inc = 0
     engine_coolant = 0
@@ -297,6 +311,12 @@ if __name__ in "__main__":
                 elapsed_time = get_elapsed_time(bus)
                 elapsed_time_str = "Elapsed time since engine started: {0}".format(str(elapsed_time).rjust(6))
 
+                # Fuel tank level
+                byte_3 = get_fuel_level(bus)
+                fuel_tank_level = int(100 * byte_3 / 255)
+                fuel_tank_level_str = "Fuel tank level: {0}%".format(str(fuel_tank_level).rjust(2))
+                fuel_tank_level_str += " ({:02x})".format(byte_3) # DEBUG
+
                 tmp_inc = 0
 
             if diagnostic_id == can_29bits_diagnostic_id: # Fiat 500 only
@@ -330,6 +350,7 @@ if __name__ in "__main__":
             infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, throttle_str); i += 1
             infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, accel_str); i += 1
             infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, elapsed_time_str); i += 1
+            infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fuel_tank_level_str); i += 1
             if fiat_engine_on:
                 infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fiat_status_str); i += 1
                 infos_win.addstr(int(y_pad + i * floor(h/nb_elts)), x_pad, fiat_status2_str); i += 1
@@ -339,9 +360,8 @@ if __name__ in "__main__":
             print_graph(stdscr, right, rpm, max_rpm)
 
         except Exception as e:
-            print(e)
-            while (1):
-                pass
-            break
+            clean(stdscr)
+            print("main: {0}".format(e))
+            exit(1)
 
     clean(stdscr)
