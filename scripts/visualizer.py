@@ -65,7 +65,7 @@ def get_coolant_temp(bus):
     answer = can_xchg(bus, diagnostic_id, [2, 1, 5, 0, 0, 0, 0, 0], extended)
     if answer is None:
         return 0
-    return answer.data[3] - 40
+    return answer.data[3]
 
 def get_rpm(bus):
     answer = can_xchg(bus, diagnostic_id, [2, 1, 0xc, 0, 0, 0, 0, 0], extended)
@@ -303,7 +303,7 @@ if __name__ in "__main__":
 
             if tmp_inc % 60 == 0:
                 # Engine coolant temperature
-                engine_coolant = get_coolant_temp(bus)
+                engine_coolant = get_coolant_temp(bus) - 40
                 coolant_str = "Engine coolant temperature: {0}ºC".format(str(engine_coolant).rjust(2))
                 coolant_str += " ({:02x})".format(engine_coolant) # DEBUG
 
