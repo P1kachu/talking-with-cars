@@ -82,6 +82,11 @@ Seems to convey status bitfields
             ^------------ 6: Contact on
            ^------------- 7: Ignition
 
+0a18a000[4]:
+  0x00 = 0b0000 => City mode deactivated
+  0x08 = 0b1000 => City mode activated
+           ^------------- 3: City mode
+
 0a18a000[6]:
   0x00 = 0b00000000 => Handbrake off, RWH off
   0x10 = 0b00000000 => Handbrake off, RWH on
