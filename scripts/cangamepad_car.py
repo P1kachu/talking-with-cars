@@ -4,7 +4,7 @@ import can
 import socket
 import struct
 
-INTERFACE='vcan0'
+INTERFACE='can0'
 IP='10.1.1.100'
 PORT=12345
 can_29bits_diagnostic_id = 0x18DB33F1
@@ -75,8 +75,8 @@ def get_pedals(bus):
     brake_p = can29_recv(bus, 0x0810a000, 2)
     brake_p = bin(brake_p >> 4).count("1") - 1
 
-    accel_p = get_accel_pos(bus)
-    accel_p = int((accel_p - 0x26) / 255)
+    accel_p = can29_recv(bus, 0x0618a001, 7)
+    accel_p = int(accel_p / 255 * 100)
 
     return (clutch_p, brake_p, accel_p)
 

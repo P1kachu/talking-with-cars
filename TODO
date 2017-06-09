@@ -8,6 +8,11 @@ Polo:
 Fiat:
   - Test parking radar
   - Re try steering wheel
+    - Test fault code C1278)
+    - Bruteforce OBD PIDs
+    - Try to trigger events (assisted driving)
+    - Reverse multiecuscan...
+    - dcm services
   - Try some CAN injection
 
 

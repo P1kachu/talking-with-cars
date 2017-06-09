@@ -199,13 +199,16 @@ foohid.create(DEVICE_NAME,
         "SN 123",
         2,
         3)
+print("Created device")
 
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(("", PORT))
+    print("Created socket")
 
     while True:
         data = s.recv(1024)
+        #print("Received {0}".format(data))
         out_report = create_output_report(data)
         foohid.send(DEVICE_NAME, out_report)
 
