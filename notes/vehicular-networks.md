@@ -3,6 +3,7 @@
 > vehicular-networks.pdf
 > can-based-hlp.pdf
 > http://jazdw.net/tp20
+> http://marco.guardigli.it/2010/10/hacking-your-car.html
 
 ### OSI Model
 Different configuration possible, but we are interested in this one:
