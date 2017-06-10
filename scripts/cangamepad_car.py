@@ -11,6 +11,9 @@ can_29bits_diagnostic_id = 0x18DB33F1
 diagnostic_id = can_29bits_diagnostic_id
 extended = (diagnostic_id == can_29bits_diagnostic_id)
 
+WHOLE_MESSAGE_CNST=-1
+MAX_STEERING_CNST=0x450
+
 def _is_answer(answer, data):
     '''
     Check if the message received answers our query
@@ -51,6 +54,9 @@ def can29_recv(bus, arb_id, byte_nb):
     while not answer or answer.arbitration_id != arb_id or len(answer.data) <= byte_nb:
         answer = bus.recv(0.1)
 
+    if byte_nb == WHOLE_MESSAGE_CNST:
+        return answer
+
     return answer.data[byte_nb]
 
 def get_speed(bus):
@@ -83,12 +89,23 @@ def get_pedals(bus):
 def get_steering_wheel(bus):
     # http://www.fiatforum.com/tech-talk/451078-obd-ii-epid-steering-wheel-angle.html#post4271629
     # https://www.sparkfun.com/datasheets/Widgets/ELM327_AT_Commands.pdf
+    answer = None
+    arb_id = 0x18DA30f1
+    data = [0x3, 0x22, 0x09, 0x48, 0, 0, 0, 0]
+    while not answer or answer.arbitration_id != 0x18daf130:
+        try:
+            msg = can.Message(arbitration_id=arb_id, data=data, extended_id=True)
+            bus.send(msg)
+            answer = bus.recv(0.1)
+        except OSError:
+            pass
 
-    # TODO: Check if we need to initialize UDS session each time
-    answer = can_xchg(bus, 0x18DA30f1, [0x2, 0x10, 0x03, 0, 0, 0, 0, 0], True)
-    angle = answer.data[5]
-    return -angle if answer.data[4] else angle
+    value = answer.data[5] * 256 + answer.data[6]
 
+    if value > 0x8000:
+        value = -(0x10000 - value)
+
+    return value + MAX_STEERING_CNST
 
 if __name__ in "__main__":
     bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
@@ -97,7 +114,7 @@ if __name__ in "__main__":
 
     # Initialize an UDS critical diagnosis session (for the steering wheel)
     # https://en.wikipedia.org/wiki/Unified_Diagnostic_Services
-    can_xchg(bus, 0x18DA30f1, [0x3, 0x22, 0x09, 0x48, 0, 0, 0, 0], True)
+    can_xchg(bus, 0x18DA30f1, [0x2, 0x10, 0x03, 0, 0, 0, 0, 0], True)
 
     while 1:
        speed = get_speed(bus)
@@ -107,12 +124,13 @@ if __name__ in "__main__":
 
        msg = b''
        msg += struct.pack("B", speed)
-       msg += struct.pack("?", handbrake)
+       msg += struct.pack("B", handbrake)
        msg += struct.pack("B", clutch)
        msg += struct.pack("B", brakes)
        msg += struct.pack("B", accelerator)
-       msg += struct.pack("I", steering_angle)
-       msg += struct.pack("I", steering_angle) # Hack to solve unpack issue
+       msg += struct.pack("3B", 0, 0, 0) # Padding
+       msg += struct.pack("L", steering_angle)
+       print(msg)
        s.sendto(msg, (IP, PORT))
 
 

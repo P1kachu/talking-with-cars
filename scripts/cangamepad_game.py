@@ -8,6 +8,7 @@ import socket
 
 PORT=12345
 DEVICE_NAME="FooHID CAN Joypad"
+STEERING_MAX_ABS_CNST = 0x450 * 2
 
 xbox = (
     0x05, 0x01,        # Usage Page (Generic Desktop)
@@ -172,9 +173,10 @@ xbox = (
         )
 
 def convert(data):
-    return struct.unpack_from("B?BBBI", data)
+    return struct.unpack_from("BBBBBI", data)
 
 def get_steering(steering_angle):
+    steering_angle = int((steering_angle / STEERING_MAX_ABS_CNST) * 255)
     return steering_angle
 
 def create_output_report(data):
@@ -210,7 +212,7 @@ try:
         data = s.recv(1024)
         #print("Received {0}".format(data))
         out_report = create_output_report(data)
-        foohid.send(DEVICE_NAME, out_report)
+        #foohid.send(DEVICE_NAME, out_report)
 
 except KeyboardInterrupt:
     foohid.destroy(DEVICE_NAME)
