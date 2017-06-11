@@ -18,15 +18,17 @@ def _is_answer(answer, data):
     '''
     Check if the message received answers our query
     '''
-    ret = True
-
     if len(answer.data) < 3:
         return False
 
-    ret &= (answer.data[1] == data[1] + 0x40) # REQUEST MODE
-    ret &= (answer.data[2] == data[2])        # REQUEST PID
+    if answer.data[1] != data[1] + 0x40:
+        # REQUEST MODE
+        return False
+    if answer.data[2] != data[2]:
+        # REQUEST PID
+        return False
 
-    return ret
+    return True
 
 def can_xchg(bus, arb_id, data, ext=False):
     '''
