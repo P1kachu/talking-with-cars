@@ -15,13 +15,10 @@ FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
 - Uses 29bits (Extended) CAN BUS
 - 500kb/s
 - Debug arbitration ID: 0x18DB33F1
-- UDS arbitration ID: 0x18DA30f1
-
-
 
 
 ## Arbitration ID meaning example (18DAF130)
-18DA: Standard identifier for physically addressed signals (the tool is asking one module for a response)
+18DA: Standard identifier for physically addressed signals (the tool is asking one module for a response).
 18DB: Ask all of the modules for data (functionally addressed)
 F1:   A “tester” is asking for the information as opposed to another module onboard
 30:   The destination address
@@ -36,6 +33,7 @@ F1:   A “tester” is asking for the information as opposed to another module 
 One is able to initiate a UDS diagnostic session by sending the following message:
 
 ```python
+# 0x18DA30f1: 30 is the Steering ECU. 0x10 would be the engine
 # 0x10: Diagnostic Session Control
 # 0x03: Safety system diagnostic session (test all safety-critical diagnostic functions)
 data = [0x2, 0x10, 0x03, 0, 0, 0, 0, 0]
