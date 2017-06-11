@@ -88,6 +88,7 @@ print("Created socket")
 
 accel = 20
 steering = 127
+prev_steering = 127
 
 keys = [0,0,0,0]
 tmp_keys = [0,0,0,0]
@@ -116,14 +117,16 @@ try:
             keys[0] = 0x2c
         if accelerator > 0:
             keys[1] = 0x52
-        if steering < 100:
+        if steering < 120 or prev_steering < steering - 100:
             keys[2] = 0x50
-        elif steering > 154:
+        elif steering > 134 or prev_steering > steering + 100:
             keys[2] = 0x4f
         else:
             keys[2] = 0
         if brakes:
             keys[3] = 0x51
+
+        prev_steering = steering
 
         reset = False
         for i in range(4):
@@ -137,7 +140,8 @@ try:
             #time.sleep(1)
             pass
         else:
-            time.sleep(0.2)
+            #time.sleep(0.2)
+            pass
 
         foohid.send("FooHID simple keyboard",
                     struct.pack('8B',
