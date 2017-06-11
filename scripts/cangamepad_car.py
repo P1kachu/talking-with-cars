@@ -102,6 +102,10 @@ def get_steering_wheel(bus):
         except OSError:
             pass
 
+    # Send UDS ACK
+    msg = can.Message(arbitration_id=arb_id, data=[0x30, 0, 0, 0, 0, 0, 0, 0], extended_id=True)
+    bus.send(msg)
+
     value = answer.data[5] * 256 + answer.data[6]
 
     if value > 0x8000:
@@ -132,7 +136,7 @@ if __name__ in "__main__":
        msg += struct.pack("B", accelerator)
        msg += struct.pack("3B", 0, 0, 0) # Padding
        msg += struct.pack("L", steering_angle)
-       print(msg)
+       #print(msg)
        s.sendto(msg, (IP, PORT))
 
 
