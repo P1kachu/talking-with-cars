@@ -9,11 +9,66 @@ FIAT 500 Nuova 500C 1.2 MPi Cabriolet S&S 69 cv
 > https://www.scantool.net/scantool/downloads/64/ecusim_5100-ug.pdf
 > https://github.com/kipyegonmark/mechanic/issues/6
 > https://www.dgtech.com/wp-content/uploads/2016/07/DGDiagOBDII-manual.pdf
+> https://fabiobaltieri.com/2013/07/23/hacking-into-a-vehicle-can-bus-toyothack-and-socketcan/#comment-14760
 
 
 - Uses 29bits (Extended) CAN BUS
 - 500kb/s
 - Debug arbitration ID: 0x18DB33F1
+- UDS arbitration ID: 0x18DA30f1
+
+
+
+
+## Arbitration ID meaning example (18DAF130)
+18DA: Standard identifier for physically addressed signals (the tool is asking one module for a response)
+18DB: Ask all of the modules for data (functionally addressed)
+F1:   A “tester” is asking for the information as opposed to another module onboard
+30:   The destination address
+
+
+
+
+
+
+## Data received from UDS (mode 22)
+
+One is able to initiate a UDS diagnostic session by sending the following message:
+
+```python
+# 0x10: Diagnostic Session Control
+# 0x03: Safety system diagnostic session (test all safety-critical diagnostic functions)
+data = [0x2, 0x10, 0x03, 0, 0, 0, 0, 0]
+can.Message(arbitration_id=0x18DA30f1, data=data, extended_id=True)
+```
+
+After this, using mode 0x22 (Read Data By Identifier), one is able to query
+different types of information.
+
+### 0948
+This ID returns multiple data. Here is an example (the answer is more than 8 bytes):
+TX    18DA30F1    03 22 09 48 00 00 00 00
+RX    18DAF130    10 08 62 09 48 00 19 C8 00 06
+
+Here is the interpretation (thanks Alexey Chernikov)
+RX[5-6]: Angle of the steering wheel
+RX[7]:   battery voltage (multiplied by 16)
+RX[8]:   vehicle speed
+RX[9]:   Bitfield:
+         0: Is engine running
+         1: Is key in MAR
+         2: Is driving mode in "City" (0 ==> Normal)
+         3: Is MIL on
+         4: Is electric steering active
+         5: Is steering column motor torque position sensor present
+         6: Is vehicle moving
+
+
+
+
+
+
+
 
 ## Reverse engineering broadcast message
 

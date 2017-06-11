@@ -9,7 +9,6 @@ lo:
 Fiat:
   - Test parking radar
   - Test UDS security session
-  - Test to shut the other messages on the BUS (UDS?)
   - Try gear with 22192D (0x1)
     - Fail, send output to AlfaOBD (22F1A0)
 
