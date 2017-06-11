@@ -1,4 +1,5 @@
-Polo:
+Po
+lo:
 - Try timing attack
 - Try different actions when requesting readByCommonIdentifier
 - Try readByLocalIdentifier
@@ -7,9 +8,9 @@ Polo:
 
 Fiat:
   - Test parking radar
-  - Re try steering wheel
-    - Try to trigger events (assisted driving)
-    - Reverse multiecuscan...
-  - Try some CAN injection
+  - Test UDS security session
+  - Test to shut the other messages on the BUS (UDS?)
+  - Try gear with 22192D (0x1)
+    - Fail, send output to AlfaOBD (22F1A0)
 
 
