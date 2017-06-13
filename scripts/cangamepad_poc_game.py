@@ -4,12 +4,15 @@ import uinput
 import time
 import random
 import socket
+import struct
 
 CONTROLLER = "Microsoft X-Box 360 pad - P1ka"
 VENDOR = 0x45e
 PRODUCT = 0x28e
 VERSION = 101
 PORT=12345
+STEERING_MAX_ABS_CNST = 0x450
+STEERING_MAX_GAME_CNST = 32767
 
 events = (
     uinput.BTN_SOUTH,                       # Handbrake
@@ -39,14 +42,17 @@ def convert(data):
     return struct.unpack_from("BBBBBI", data)
 
 def get_steering(steering_angle):
-    steering_angle = int((steering_angle / STEERING_MAX_ABS_CNST) * 255)
+    steering_angle -= STEERING_MAX_ABS_CNST
+    steering_angle = int((steering_angle / STEERING_MAX_ABS_CNST) * STEERING_MAX_GAME_CNST)
     return steering_angle
 
 def parse_data(data):
     speed, handbrake, clutch, brakes, accelerator, steering_angle = convert(data)
     steering = get_steering(steering_angle)
-    print(speed, handbrake, clutch, brakes, accelerator, steering_angle)
-    return (speed, handbrake, clutch, brakes, accelerator, steering_angle)
+    brakes = int(brakes/2 * 255)
+    accelerator = int(min(accelerator / 1, 1) * 255)
+    #print(speed, handbrake, clutch, brakes, accelerator, steering_angle)
+    return (speed, handbrake, clutch, brakes, accelerator, steering)
 
 
 try:
@@ -68,11 +74,14 @@ try:
             data = s.recv(1024)
             (speed, handbrake, clutch, brakes, accelerator, steering_angle) = parse_data(data)
             if handbrake:
-                device.emit_click(uintput.BTN_SOUT, syn=False)
-            device.emit(uinput.ABS_X, steering_angle, syn=False)
-            device.emit(uinput.ABS_GAS, accelerator, syn=False)
+                device.emit(uinput.BTN_SOUTH, 1, syn=True)
+            else:
+                device.emit(uinput.BTN_SOUTH, 0, syn=True)
+            device.emit(uinput.ABS_X, steering_angle, syn=True)
+            device.emit(uinput.ABS_GAS, accelerator, syn=True)
             device.emit(uinput.ABS_BRAKE, brakes, syn=True)
-            time.sleep(0.3)
+            #print(handbrake, brakes, accelerator, steering_angle)
+            #time.sleep(0.3)
 except Exception as e:
     print(e)
     pass
