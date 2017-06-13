@@ -9,8 +9,7 @@ Fiat:
   - Test parking radar
   - Test UDS security session
   - Try gear with 22192D (0x1)
-    - Fail, send output to AlfaOBD (22F1A0)
-
+    - Fail, send output to AlfaOBD (22F1A0) - Done
 
 CanPAD:
   - Add reverse
