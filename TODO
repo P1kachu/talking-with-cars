@@ -1,5 +1,4 @@
-Po
-lo:
+Polo:
 - Try timing attack
 - Try different actions when requesting readByCommonIdentifier
 - Try readByLocalIdentifier
@@ -12,4 +11,11 @@ Fiat:
   - Try gear with 22192D (0x1)
     - Fail, send output to AlfaOBD (22F1A0)
 
+
+CanPAD:
+  - Add reverse
+  - Add gears
+  - Add buttons for:
+    - Camera
+    - Gears ? (near the wheel)
 
