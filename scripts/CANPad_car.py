@@ -4,9 +4,14 @@ import can
 import socket
 import struct
 
+# CANPad - Car server - v1.0
+# Use this script on the car to send the data
+# over UDP
+
 INTERFACE='can0'
 IP='10.1.1.100'
 PORT=12345
+
 can_29bits_diagnostic_id = 0x18DB33F1
 diagnostic_id = can_29bits_diagnostic_id
 extended = (diagnostic_id == can_29bits_diagnostic_id)

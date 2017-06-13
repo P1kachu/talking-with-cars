@@ -6,7 +6,12 @@ import random
 import socket
 import struct
 
-CONTROLLER = "Microsoft X-Box 360 pad - P1ka"
+# CANPad - Gamepad client - v1.0
+# Use this script on the receiver computer
+# to send data over uinput to your game
+
+#CONTROLLER = "Microsoft X-Box 360 pad - P1ka"
+CONTROLLER = "P1ka - Fiat 500c CANPad 1.0"
 VENDOR = 0x45e
 PRODUCT = 0x28e
 VERSION = 101
