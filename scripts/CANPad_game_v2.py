@@ -9,11 +9,17 @@ from evdev import UInput, InputDevice, ecodes as e
 # CANPad - Gamepad client - v2.0
 # Use this script on the receiver computer
 # to send data over evdev by hijacking your controller
+# Settings for Dirt Showdown
 
 DEFAULT_XBOX_CONTROLLER_PATH = '/dev/input/event13'
 PORT=12345
 STEERING_MAX_ABS_CNST = 0x450
 STEERING_MAX_GAME_CNST = 32767
+HANDBRAKE_BUTTON = e.BTN_EAST
+STEERING_BUTTON = e.ABS_X
+ACCELERATOR_BUTTON = e.ABS_RZ
+BRAKES_BUTTON = e.ABS_Z
+
 
 def convert(data):
     return struct.unpack_from("BBBBBI", data)
@@ -48,13 +54,13 @@ try:
         data = s.recv(1024)
         (speed, handbrake, clutch, brakes, accelerator, steering_angle) = parse_data(data)
         if handbrake:
-            xbox.write(e.EV_KEY, e.BTN_SOUTH, 1)
+            xbox.write(e.EV_KEY, HANDBRAKE_BUTTON, 1)
         else:
-            xbox.write(e.EV_KEY, e.BTN_SOUTH, 0)
+            xbox.write(e.EV_KEY, HANDBRAKE_BUTTON, 0)
 
-        xbox.write(e.EV_ABS, e.ABS_X, steering_angle)
-        xbox.write(e.EV_ABS, e.ABS_RZ, accelerator)
-        xbox.write(e.EV_ABS, e.ABS_Z, brakes)
+        xbox.write(e.EV_ABS, STEERING_BUTTON, steering_angle)
+        xbox.write(e.EV_ABS, ACCELERATOR_BUTTON, accelerator)
+        xbox.write(e.EV_ABS, BRAKES_BUTTON, brakes)
 
         #print(handbrake, brakes, accelerator, steering_angle)
         #time.sleep(0.3)
