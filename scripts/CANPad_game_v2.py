@@ -4,7 +4,7 @@ import time
 import socket
 import struct
 import sys
-from evdev import UInput, InputDevice, ecodes as e
+from evdev import UInput, InputDevice, ecodes as e, InputEvent
 
 # CANPad - Gamepad client - v2.0
 # Use this script on the receiver computer
@@ -46,21 +46,39 @@ try:
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(("", PORT))
+    s.setblocking(0)
     print("Created socket")
 
+
     xbox = InputDevice(gamepad_path)
+    while True:
+        try:
+            data = s.recv(1024)
+            break
+        except:
+            pass
+
     print("Waiting for input")
     while True:
-        data = s.recv(1024)
+        try:
+            newdata = s.recv(1024)
+            data = newdata
+        except:
+            pass
+
         (speed, handbrake, clutch, brakes, accelerator, steering_angle) = parse_data(data)
         if handbrake:
             xbox.write(e.EV_KEY, HANDBRAKE_BUTTON, 1)
         else:
             xbox.write(e.EV_KEY, HANDBRAKE_BUTTON, 0)
+        xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
 
         xbox.write(e.EV_ABS, STEERING_BUTTON, steering_angle)
+        xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
         xbox.write(e.EV_ABS, ACCELERATOR_BUTTON, accelerator)
+        xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
         xbox.write(e.EV_ABS, BRAKES_BUTTON, brakes)
+        xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
 
         #print(handbrake, brakes, accelerator, steering_angle)
         #time.sleep(0.3)
