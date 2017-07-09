@@ -11,10 +11,12 @@ Fiat:
   - Try gear with 22192D (0x1)
     - Fail, send output to AlfaOBD (22F1A0) - Done
 
-CanPAD:
+CANPad v1:
   - Add reverse
   - Add gears
   - Add buttons for:
     - Camera
     - Gears ? (near the wheel)
 
+CANPad v2:
+  - Test
