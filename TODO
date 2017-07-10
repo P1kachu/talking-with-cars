@@ -19,4 +19,5 @@ CANPad v1:
     - Gears ? (near the wheel)
 
 CANPad v2:
-  - Test
+  - Find the brakes pedal position (not 0->2)
+  - Find a way to get a more realistic experience
