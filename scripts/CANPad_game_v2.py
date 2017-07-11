@@ -18,10 +18,12 @@ DEFAULT_XBOX_CONTROLLER_PATH = '/dev/input/event13'
 PORT=12345
 
 # Accelerator settings
-# Used to normalize the accelerator and
-# add some precision. Value in percents
-# of pedal applied
-ACCEL_PRECISION = 1
+# Used to normalize the accelerator and add some precision.
+# Value in percents of pedal applied.
+# Boost is activated if received acceleration percentage
+# value is superior to ACCEL_BOOST_THRESHOLD
+ACCEL_THRESHOLD = 1
+ACCEL_BOOST_THRESHOLD = 20
 
 # Max steering angle sent by car
 STEERING_MAX_ABS_CNST = 0x450
@@ -61,8 +63,10 @@ def parse_data(data):
     speed, handbrake, clutch, brakes, accelerator, steering_angle = convert(data)
     steering = get_steering(steering_angle)
     brakes = int(brakes/2 * 255)
-    accelerator = int(255 / ACCEL_PRECISION * min(ACCEL_PRECISION, accelerator))
-    return (speed, handbrake, clutch, brakes, accelerator, steering)
+    boost = accelerator > ACCEL_BOOST_THRESHOLD
+    accelerator = int(255 / ACCEL_THRESHOLD * min(ACCEL_THRESHOLD, accelerator))
+
+    return (speed, handbrake, clutch, brakes, accelerator, steering, boost)
 
 
 try:
@@ -95,14 +99,15 @@ try:
         except:
             pass
 
-        (speed, handbrake, clutch, brakes, accelerator, steering_angle) = parse_data(data)
+        (speed, handbrake, clutch, brakes, accelerator, steering_angle, boost) = parse_data(data)
+
         if handbrake:
             xbox.write(e.EV_KEY, HANDBRAKE_BUTTON, 1)
         else:
             xbox.write(e.EV_KEY, HANDBRAKE_BUTTON, 0)
         xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
 
-        if clutch:
+        if boost:
             xbox.write(e.EV_KEY, BOOST_BUTTON, 1)
         else:
             xbox.write(e.EV_KEY, BOOST_BUTTON, 0)
@@ -110,8 +115,10 @@ try:
 
         xbox.write(e.EV_ABS, STEERING_BUTTON, steering_angle)
         xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
+
         xbox.write(e.EV_ABS, ACCELERATOR_BUTTON, accelerator)
         xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
+
         xbox.write(e.EV_ABS, BRAKES_BUTTON, brakes)
         xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
 
