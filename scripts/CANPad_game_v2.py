@@ -17,6 +17,12 @@ DEFAULT_XBOX_CONTROLLER_PATH = '/dev/input/event13'
 # UDP port to receive data from
 PORT=12345
 
+# Accelerator settings
+# Used to normalize the accelerator and
+# add some precision. Value in percents
+# of pedal applied
+ACCEL_PRECISION = 1
+
 # Max steering angle sent by car
 STEERING_MAX_ABS_CNST = 0x450
 
@@ -55,7 +61,7 @@ def parse_data(data):
     speed, handbrake, clutch, brakes, accelerator, steering_angle = convert(data)
     steering = get_steering(steering_angle)
     brakes = int(brakes/2 * 255)
-    accelerator = int(min(accelerator / 1, 1) * 255)
+    accelerator = int(255 / ACCEL_PRECISION * min(ACCEL_PRECISION, accelerator))
     return (speed, handbrake, clutch, brakes, accelerator, steering)
 
 
