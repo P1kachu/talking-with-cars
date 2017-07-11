@@ -37,6 +37,7 @@ HANDBRAKE_BUTTON = e.BTN_EAST
 STEERING_BUTTON = e.ABS_X
 ACCELERATOR_BUTTON = e.ABS_RZ
 BRAKES_BUTTON = e.ABS_Z
+BOOST_BUTTON = e.BTN_SOUTH
 
 
 def convert(data):
@@ -93,6 +94,12 @@ try:
             xbox.write(e.EV_KEY, HANDBRAKE_BUTTON, 1)
         else:
             xbox.write(e.EV_KEY, HANDBRAKE_BUTTON, 0)
+        xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
+
+        if clutch:
+            xbox.write(e.EV_KEY, BOOST_BUTTON, 1)
+        else:
+            xbox.write(e.EV_KEY, BOOST_BUTTON, 0)
         xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
 
         xbox.write(e.EV_ABS, STEERING_BUTTON, steering_angle)
