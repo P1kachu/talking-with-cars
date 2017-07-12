@@ -33,7 +33,7 @@ def can_xchg(bus, arb_id, data, extended=False):
     print("RX: {0}".format(answer))
     return answer
 
-def kwp2000_init_diagnostic_session(bus, arb_id, session_type=EXTENDED_DIAGNOSTIC):
+def uds_init_diagnostic_session(bus, arb_id, session_type=EXTENDED_DIAGNOSTIC):
     answer = can_xchg(bus, arb_id, [2, DIAGNOSTIC_SESSION, session_type, 0, 0, 0, 0, 0])
 
     if answer and answer.data[1] == (DIAGNOSTIC_SESSION + 0x40):
@@ -48,7 +48,7 @@ def kwp2000_init_diagnostic_session(bus, arb_id, session_type=EXTENDED_DIAGNOSTI
 def compute_key(seed):
     return seed
 
-def _kwp2000_init_security_session_error(code):
+def _uds_init_security_session_error(code):
     if code == SECU_SESSION_BAD_KEY:
         print("Bad key in security session init")
     elif code == SECU_SESSION_EXCEED_NUMBER:
@@ -62,14 +62,14 @@ def _kwp2000_init_security_session_error(code):
         print("Failure in sending security session key")
 
 
-def kwp2000_init_security_session(bus, arb_id, req_seed=REQUEST_SEED, send_key=SEND_KEY):
+def uds_init_security_session(bus, arb_id, req_seed=REQUEST_SEED, send_key=SEND_KEY):
     answer = can_xchg(bus, arb_id, [2, SECURITY_SESSION, req_seed, 0, 0, 0, 0, 0])
 
     if answer and answer.data[1] == (SECURITY_SESSION + 0x40):
         seed = list(answer.data[3:7])
         print("Security session seed: {0}".format(seed))
     else:
-        _kwp2000_init_security_session_error(answer.data[3])
+        _uds_init_security_session_error(answer.data[3])
         return None
 
     if send_key == IGNORE_KEY:
@@ -82,17 +82,17 @@ def kwp2000_init_security_session(bus, arb_id, req_seed=REQUEST_SEED, send_key=S
         #print("Security session opened!")
         pass
     else:
-        _kwp2000_init_security_session_error(answer.data[3])
+        _uds_init_security_session_error(answer.data[3])
         return None
 
     return answer
 
-def kwp2000_test_security_session(bus, key=SEND_KEY, arb_id=0x7e0):
+def uds_test_security_session(bus, key=SEND_KEY, arb_id=0x7e0):
     iteration_nb = 15
 
     while True:
-        if kwp2000_init_diagnostic_session(bus, arb_id):
-            if kwp2000_init_security_session(bus, arb_id, VW_REQUEST_SEED, key):
+        if uds_init_diagnostic_session(bus, arb_id):
+            if uds_init_security_session(bus, arb_id, VW_REQUEST_SEED, key):
                 print("GO DUMP STUFF")
                 return
             elif key != IGNORE_KEY:
@@ -103,16 +103,16 @@ def kwp2000_test_security_session(bus, key=SEND_KEY, arb_id=0x7e0):
         if iteration_nb == 0:
             return
 
-def kwp2000_test_other_ecus(bus):
+def uds_test_other_ecus(bus):
     possible_ids = [0x0700, 0x0703, 0x0704, 0x0706, 0x0707, 0x0708, 0x070A,
                     0x0711, 0x0713, 0x0714, 0x0715, 0x0751, 0x076C, 0x07E0,
                     0x07F1]
     for arb_id in possible_ids:
-        if kwp2000_init_diagnostic_session(bus, arb_id):
-            kwp2000_test_security_session(bus, key=IGNORE_KEY, arb_id=arb_id)
+        if uds_init_diagnostic_session(bus, arb_id):
+            uds_test_security_session(bus, key=IGNORE_KEY, arb_id=arb_id)
 
-def kwp2000_test_readall(bus, arb_id=0x7e0):
-    if kwp2000_init_diagnostic_session(bus, arb_id):
+def uds_test_readall(bus, arb_id=0x7e0):
+    if uds_init_diagnostic_session(bus, arb_id):
         for high in range(0xff):
             for low in range(0xff):
                 answer = can_xchg(bus, arb_id, [5, 0x22, high, low, 0x1, 0x1, 0, 0])
@@ -123,6 +123,6 @@ def kwp2000_test_readall(bus, arb_id=0x7e0):
 #### MAIN ####
 
 bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
-#kwp2000_test_other_ecus(bus)
-kwp2000_test_readall(bus)
+#uds_test_other_ecus(bus)
+uds_test_readall(bus)
 
