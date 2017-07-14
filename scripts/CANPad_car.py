@@ -79,7 +79,22 @@ def get_accel_pos(bus):
     return answer.data[3]
 
 def get_handbrake(bus):
-    return can29_recv(bus, 0x0a18a000, 0) != 0
+    answer = None
+    arb_id = 0x18DA28F1
+    data = [0x3, 0x22, 0x08, 0x89, 0, 0, 0, 0]
+    while not answer or answer.arbitration_id != 0x18daf128:
+        try:
+            msg = can.Message(arbitration_id=arb_id, data=data, extended_id=True)
+            bus.send(msg)
+            answer = bus.recv(0.1)
+        except OSError:
+            pass
+
+    # Send UDS ACK
+    msg = can.Message(arbitration_id=arb_id, data=[0x30, 0, 0, 0, 0, 0, 0, 0], extended_id=True)
+    bus.send(msg)
+
+    return answer.data[5] & 1
 
 def get_pedals(bus):
     clutch_p = can29_recv(bus, 0x0628a001, 5)
@@ -141,7 +156,7 @@ if __name__ in "__main__":
        msg += struct.pack("B", accelerator)
        msg += struct.pack("3B", 0, 0, 0) # Padding
        msg += struct.pack("L", steering_angle)
-       #print(msg)
+       print(msg)
        s.sendto(msg, (IP, PORT))
 
 
