@@ -42,9 +42,20 @@ can.Message(arbitration_id=0x18DA30f1, data=data, extended_id=True)
 
 After this, using mode 0x22 (Read Data By Identifier), one is able to query
 different types of information.
+Thanks to Alexey Chernikov, AlfaOBD's creator, I was able to recover the
+following information.
 
-### 0948
-This ID returns multiple data. Here is an example (the answer is more than 8 bytes):
+### ECU -> ID mappings
+
+0x10: Engine
+0x28: ABS
+0x30: Steering Column
+0x40: Body
+
+### Steering column (0x30)
+#### 0948
+This command returns multiple data.
+Here is an example (the answer is more than 8 bytes):
 TX    18DA30F1    03 22 09 48 00 00 00 00
 RX    18DAF130    10 08 62 09 48 00 19 C8 00 06
 
@@ -61,8 +72,16 @@ RX[9]:   Bitfield:
          5: Is steering column motor torque position sensor present
          6: Is vehicle moving
 
+### ABS (0x28)
+#### 0889
 
+RX[5]:   Bitfieled:
+         0: Is handbrake set
 
+#### 0885
+
+Returns the steering wheel angle too, in two bytes.
+The value is `(X <= 32767) ? X / 16 : (X - 65535) / 16`, with X being the two bytes
 
 
 
