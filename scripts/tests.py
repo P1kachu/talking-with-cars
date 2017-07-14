@@ -96,7 +96,6 @@ for i in range(0xffffff):
     #if msg:
     #    print("Response received for PID {0}: {1}".format(i, msg))
     #    break
-'''
 
 polo_id_data_mappings = {
         0x0210a006: [0x06, 0x00, 0x06, 0x00, 0x06, 0x00, 0x06, 0x00]
@@ -107,3 +106,74 @@ for i in range(0xffff):
     data = polo_id_data_mappings[arb_id]
     msg = can.Message(arbitration_id=arb_id, data=data, extended_id=True)
     bus.send(msg)
+'''
+
+def _is_answer(answer, data):
+    '''
+    Check if the message received answers our query
+    '''
+    if len(answer.data) < 3:
+        return False
+
+    if answer.data[1] != data[1] + 0x40:
+        # REQUEST MODE
+        return False
+    if answer.data[2] != data[2]:
+        # REQUEST PID
+        return False
+
+    return True
+
+def can_xchg_advanced(bus, arb_id, data, ext=False):
+    '''
+    Noise proof
+    '''
+    msg = can.Message(arbitration_id=arb_id,
+            data=data,
+            extended_id=ext)
+
+    answer = None
+    while not answer or not _is_answer(answer, data):
+        # 29bits CAN requires to resend the message until
+        # the answer is received.
+        try:
+            bus.send(msg)
+            answer = bus.recv(0.05)
+        except:
+            pass
+
+    return answer
+
+def can29_recv(bus, arb_id, byte_nb):
+    answer = bus.recv(0.1)
+
+    while not answer or answer.arbitration_id != arb_id or len(answer.data) <= byte_nb:
+        answer = bus.recv(0.1)
+
+    if byte_nb == WHOLE_MESSAGE_CNST:
+        return answer
+
+    return answer.data[byte_nb]
+
+def is_handbrake_set(bus):
+    answer = None
+    arb_id = 0x18DA28F1
+    data = [0x3, 0x22, 0x08, 0x89, 0, 0, 0, 0]
+    #data = [0x3, 0x22, 0x08, 0x85, 0, 0, 0, 0]
+    while not answer or answer.arbitration_id != 0x18daf128:
+        try:
+            msg = can.Message(arbitration_id=arb_id, data=data, extended_id=True)
+            bus.send(msg)
+            answer = bus.recv(0.1)
+        except OSError:
+            pass
+
+    # Send UDS ACK
+    msg = can.Message(arbitration_id=arb_id, data=[0x30, 0, 0, 0, 0, 0, 0, 0], extended_id=True)
+    bus.send(msg)
+
+    return answer.data[4] & 1
+
+# UDS session
+can_xchg_advanced(bus, 0x18DA30f1, [0x2, 0x10, 0x03, 0, 0, 0, 0, 0], True)
+is_handbrake_set(bus)
