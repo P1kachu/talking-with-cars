@@ -21,3 +21,5 @@ CANPad v1:
 CANPad v2:
   - Find the brakes pedal position (not 0->2)
   - Find a way to get a more realistic experience
+  - Add more modularity (so that one just need to implement car specific
+    function, not the whole server)

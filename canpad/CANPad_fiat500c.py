@@ -80,7 +80,7 @@ def get_accel_pos(bus):
 
 def get_handbrake(bus):
     answer = None
-    arb_id = 0x18DA28F1
+    arb_id = 0x18DA28F1 # ABS ECU
     data = [0x3, 0x22, 0x08, 0x89, 0, 0, 0, 0]
     while not answer or answer.arbitration_id != 0x18daf128:
         try:
@@ -97,12 +97,15 @@ def get_handbrake(bus):
     return answer.data[5] & 1
 
 def get_pedals(bus):
+    # 0 or 1
     clutch_p = can29_recv(bus, 0x0628a001, 5)
     clutch_p = min(int(clutch_p / 0x10), 2) & 0b10
 
+    # 0 to 2
     brake_p = can29_recv(bus, 0x0810a000, 2)
     brake_p = bin(brake_p >> 4).count("1") - 1
 
+    # 0 to 100
     accel_p = can29_recv(bus, 0x0618a001, 7)
     accel_p = int(accel_p / 255 * 100)
 
@@ -112,7 +115,7 @@ def get_steering_wheel(bus):
     # http://www.fiatforum.com/tech-talk/451078-obd-ii-epid-steering-wheel-angle.html#post4271629
     # https://www.sparkfun.com/datasheets/Widgets/ELM327_AT_Commands.pdf
     answer = None
-    arb_id = 0x18DA30f1
+    arb_id = 0x18DA30f1 # Steering column ECU
     data = [0x3, 0x22, 0x09, 0x48, 0, 0, 0, 0]
     while not answer or answer.arbitration_id != 0x18daf130:
         try:
@@ -131,6 +134,7 @@ def get_steering_wheel(bus):
     if value > 0x8000:
         value = -(0x10000 - value)
 
+    # 0 to MAX_STEERING_CNST * 2 (because sent as unsigned)
     return value + MAX_STEERING_CNST
 
 if __name__ in "__main__":
@@ -138,7 +142,7 @@ if __name__ in "__main__":
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(("", PORT))
 
-    # Initialize an UDS critical diagnosis session (for the steering wheel)
+    # Initialize an UDS critical diagnosis session (for the ECUs)
     # https://en.wikipedia.org/wiki/Unified_Diagnostic_Services
     can_xchg(bus, 0x18DA30f1, [0x2, 0x10, 0x03, 0, 0, 0, 0, 0], True)
 
