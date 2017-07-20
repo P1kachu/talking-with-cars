@@ -1,8 +1,8 @@
 Playing with CAN
-================
+===============
 
 _This was the subject of my presentation of this year's LSEWeek. Slides (english)
-will soon be available, along with the stream of the presentation (french)_
+and the video (french) are respectively available [here](https://lse.epita.fr/lse-summer-week-2017/slides/lse-summer-week-2017-13-talking-with-cars/index.html#/) and [here](https://www.youtube.com/watch?v=Y5UtGGDRiBQ)_
 
 ## Sum up
 
@@ -61,3 +61,4 @@ For any question, feel free to send me an email at p1kachu@lse.epita.fr
 - http://nefariousmotorsports.com/forum/index.php?topic=4983
 - http://www.ti.com/lit/an/sloa101b/sloa101b.pdf
 - See 'notes' for more
+
