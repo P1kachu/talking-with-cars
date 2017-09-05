@@ -116,8 +116,9 @@ try:
         xbox.write(e.EV_ABS, STEERING_BUTTON, steering_angle)
         xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
 
-        xbox.write(e.EV_ABS, ACCELERATOR_BUTTON, accelerator)
-        xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
+        if not clutch:
+            xbox.write(e.EV_ABS, ACCELERATOR_BUTTON, accelerator)
+            xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))
 
         xbox.write(e.EV_ABS, BRAKES_BUTTON, brakes)
         xbox.write_event(InputEvent(1334414993, 274296, e.EV_SYN, 0, 0))

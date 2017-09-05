@@ -83,7 +83,8 @@ try:
             else:
                 device.emit(uinput.BTN_SOUTH, 0, syn=True)
             device.emit(uinput.ABS_X, steering_angle, syn=True)
-            device.emit(uinput.ABS_GAS, accelerator, syn=True)
+            if not clutch:
+                device.emit(uinput.ABS_GAS, accelerator, syn=True)
             device.emit(uinput.ABS_BRAKE, brakes, syn=True)
             #print(handbrake, brakes, accelerator, steering_angle)
             #time.sleep(0.3)
