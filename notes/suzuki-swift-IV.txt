@@ -1,0 +1,34 @@
+Suzuki Swift IV AZG 1.3 DDiS 16V 75cv
+=====================================
+
+## CAN broadcasted messages reverse engineering
+
+0x120[1:2]: rpm
+0x122[1:2]: accelerator pedal pressure
+0x13f[1:2]: rpm
+
+0x1af[0]: maybe ABS (flips betwween 0x1 and 0x81 when hard breaking, else 0)
+0x1af[6:7]: brakes pedal pressure
+
+0x318[0]: No brakes (0x1), braking (0x5)
+
+0x3a1[0]: maybe ABS (flips between multiple values when hard breaking, else 0)
+
+0x3d0[0]: Lights off (0x00), on (0x20)
+0x3d0[1]: handbrake down (0x00), up (0x40)
+0x3d0[2]: Bitvector:
+          - Defrost off (0x00), on (0x04) (bit 2)
+          - Lights off (0x00), on (0x08)  (bit 3)
+0x3d0[4]: Hazard lights (blinks, so flips between 0x00 and the following values)
+          - 0x40: Left hazard light is on
+          - 0x80: Right hazard light is on
+          - 0xC0: Both hazard ligths are on
+
+0x3d1[0]: Doors open:
+          - 0x01: Left front door open
+          - 0x02: Right front door open
+          - 0x03: Both front door open
+0x3d1[2]: Doors lock:
+          - 0x00: Both front doors unlock
+          - 0x15: Left front door only unlock
+          - 0x55: Both front doors lock
