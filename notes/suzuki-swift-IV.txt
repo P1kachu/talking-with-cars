@@ -1,6 +1,19 @@
 Suzuki Swift IV AZG 1.3 DDiS 16V 75cv
 =====================================
 
+## UDS Authentication
+
+The Suzuki Swift answers to UDS security session, and when asked for a seed
+it sends a 2 bytes seed, which is always the same (#TODO: specify here the
+two bytes seed, I forgot it).
+
+We must restart the diagnostic session before retrying any security
+authentication or the bruteforce is broken by exceedNumberOfAttempts (0x36) or
+requiredTimeDelayNotExpired (0x37) errors.
+
+We are still more or less bruteforcing it right now :) (sleep(5) minimum
+required god dammit)
+
 ## CAN broadcasted messages reverse engineering
 
 0x120[1:2]: rpm
