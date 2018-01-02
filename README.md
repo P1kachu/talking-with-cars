@@ -4,7 +4,7 @@ Playing with CAN
 _This was the subject of my presentation of this year's LSEWeek. Slides (english)
 and the video (french) are respectively available [here](https://lse.epita.fr/lse-summer-week-2017/slides/lse-summer-week-2017-13-talking-with-cars/index.html#/) and [here](https://www.youtube.com/watch?v=Y5UtGGDRiBQ)_
 
-_Update 2017: This was also part of our talk at 34c3. Slides and stream should be available sometimes in the future_
+_Update 2017: This was also part of our talk at 34c3. [slides](https://github.com/P1kachu/34c3-how-to-drift-with-any-car) and [stream](https://www.youtube.com/watch?v=KU7gl1n1tIs) now available!_
 
 ## Sum up
 
