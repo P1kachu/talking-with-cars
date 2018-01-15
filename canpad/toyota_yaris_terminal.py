@@ -36,14 +36,13 @@ else:
 known_fields = car_library.ToyotaYaris.get_known_fields()
 
 message_sink = terminal_sink.TerminalSink(known_fields)
-message_sink.start()
 
 try:
     listener = car_src.CarSrc(interface, message_sink, known_fields)
+    message_sink.start()
 
     while listener.listen():
         continue
 except OSError:
     print("Invalid interface ")
     exit(2)
-
