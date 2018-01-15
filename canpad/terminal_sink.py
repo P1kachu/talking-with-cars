@@ -105,8 +105,11 @@ class TerminalSink(threading.Thread):
         data = self.mcus[can_id]
 
         for i in range(0, 8):
-            new_value = can_message.data[i]
             old_value = data[i][0]
+            new_value = old_value
+
+            if len(can_message.data) > i:
+                new_value = can_message.data[i]
 
             # Mark an HIT
             data[i] = (new_value, new_value != old_value)
