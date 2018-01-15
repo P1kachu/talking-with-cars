@@ -26,7 +26,11 @@ You can change it to any car already added in the library.
 '''
 
 # Interface selection
-interface = "vcan0"
+if len(sys.argv) < 2:
+    interface = "can0"
+else:
+    interface = sys.argv[1]
+
 
 # Change the car here
 known_fields = car_library.ToyotaYaris.get_known_fields()
