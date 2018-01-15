@@ -56,12 +56,19 @@ def insert_value(bit_start, bit_count, payload, data):
 
 def extract_value(bit_start, bit_count, data):
     value = 0
+
     while bit_count > 0:
         bit_pos = bit_start % 8
+        bit_to_read = min(bit_count, 8 - bit_pos)
         byte_pos = bit_start // 8
 
-        mask = (0xFF >> bit_pos) << max(0, 8 - bit_count)
-        value |= data[byte_pos] & mask
+        mask = (0xFF >> (8 - bit_to_read)) << (8 - bit_to_read)
+        mask >>= bit_pos
+        mask &= 0xFF
+
+        if len(data) > byte_pos:
+            value |= data[byte_pos] & mask
+
         bit_count -= 8 - bit_pos
         bit_start += 8 - bit_pos
 
