@@ -22,20 +22,23 @@ class ToyotaYaris:
                  [ "wheel-fr",      16, 16 ], ],
         0x0b2: [ [ "wheel-bl",      0,  16 ], \
                  [ "wheel-br",      16, 16 ], ],
-        0x224: [ [ "brake-b",       5,  1  ], ],
+        0x224: [ [ "brake-b",       2,  1  ], ],
         0x260: [ [ "steering",      40, 24, steering_recv, steering_send ], ],
-        0x2c4: [ [ "engine-rev-a",  0,  16 ], ],
+        0x2c4: [ [ "engine-rev-a",  0,  16 ], \
+                 [ "unknown 2",  54,  8 ], ],
         0x3b3: [ [ "engine-rev-b",  0,  16 ], ],
-        0x3b4: [ [ "brake-a",       32, 1  ], ],
+        0x3b4: [ [ "brake-a",       39, 1  ], ],
         0x610: [ [ "speed-b",       8,  16 ], ],
         0x611: [ [ "km-count",      40, 24 ], ],
-        0x620: [ [ "door-fl",       45, 1  ], \
-                 [ "door-fr",       44, 1  ], \
-                 [ "door-rl",       43, 1  ], \
-                 [ "door-rr",       42, 1  ], \
-                 [ "door-trunk",    41, 1  ], \
-                 [ "parking-brake", 60, 8  ]  ],
-        0x621: [ [ "lock-trig",     8,  16 ], ],
+        0x620: [ [ "door-rl+rr",    44, 2  ], \
+                 [ "door-fr",       43, 1  ], \
+                 [ "door-fl",       42, 1  ], \
+                 [ "door-trunk",    46, 1  ], \
+                 [ "parking-brake", 59, 1  ]  ],
+        0x621: [ [ "lock-trig",     8,  1 ], \
+                 [ "lock-err",     16,  1 ], ],
+        0x398: [ [ "throttle slow", 0,  16 ], ],
+        0x638: [ [ "door unlocked",  19,  1 ], ],
     }
 
     '''
