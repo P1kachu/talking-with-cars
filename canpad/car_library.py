@@ -47,3 +47,14 @@ class ToyotaYaris:
         0x3b3: an accelerator related value too
         steering: find correct constants
     '''
+
+class Peugeot207_2008_diesel:
+    fields = {
+        0x208: [ [ "throttle-a", 32, 8], ],
+        0x228: [ [ "throttle-b", 16, 8], ],
+        0x50d: [ [ "brake", 47, 1], ],
+        0x412: [ [ "parking-brake", 4, 1], ],
+    }
+
+    def get_known_fields():
+        return can_helpers.dict_to_fields(Peugeot207_2008_diesel.fields)
