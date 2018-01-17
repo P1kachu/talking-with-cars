@@ -19,7 +19,7 @@ speed must be multiplied by 100.0 to get the real value. (Fixed point storage)
 
 ## Wheels
 
-Warning: front and left might be inverted. Only left-right is guarenteed
+Warning: front and left might be inverted. Only left-right is guaranteed
 
 |Designation|ID|bit-start| bit-count |
 |-|-|-|-|
