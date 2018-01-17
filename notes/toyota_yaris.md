@@ -3,6 +3,10 @@
 These are only "listen-only" fetched CAN messages. \
 I did not had the permisson to send any CAN packet :(
 
+|Designation|ID|bit-start| bit-count |
+|-|-|-|-|
+| name of the guessed field | Can ID | bit from which the data starts | bit length of the data |
+
 
 ## Speed
 
