@@ -1,5 +1,50 @@
 import can_helpers
 
+'''
+    How to add a car:
+
+    A valid class has a get_known_fields function.
+    This function return the 'fields' attribute modified by
+    can_helpers.dict_to_fields.
+
+    the field attribute:
+
+    {
+        can-id-a: [ [ field-a ], [ field-b], ... ],
+        can-id-b: [ [ field-a ], [ field-b], ... ],
+        ...
+    }
+
+    Each field represents a guessed value.
+    can-id-X is the can-message ID we are interested in.
+
+    Each field is a array of 3 + 2 values.
+
+    [ name, bit_start, bit_length, recv_func, send_func ]
+
+    name: the name of the guessed field
+    bit-start: bit from which the data starts
+    bit-count: the lenght of our field in bits
+    recv_func: a function called to tweak our value on reception
+    send_func: a function called to tweak our value before emission
+
+    Example:
+        0x0b4: [ [ "speed",         40, 16, speed_recv, speed_send ], ],
+        0x0C0: [ [ "value-b",         0, 8 ], ],
+
+        On a CAN message with the ID 0x0b4, we have one interesting field:
+            the field "speed", starting at the bit 40, with a length of 16 bits.
+            The value cannot be used directly, so we provide two functions:
+            speed_recv and speed_send.
+
+            speed_recv will divide it by 100 (Fixed point value)
+            and speed_send will multiply it by 100 and convert it to an integer.
+
+        On a CAN message with the ID 0xC0, we have a field 'value-b'.
+            Starting at the bit 0, for 8 bits.
+            The value can be used directly, so no send/recv function is given.
+
+'''
 class ToyotaYaris:
     def speed_recv(value):
         return value * 0.01
