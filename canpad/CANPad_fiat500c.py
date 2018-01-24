@@ -138,7 +138,12 @@ def get_steering_wheel(bus):
     return value + MAX_STEERING_CNST
 
 if __name__ in "__main__":
-    bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
+    try:
+        bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
+    except OSError:
+        print("Unable to connect ot the interface %s" % INTERFACE)
+        exit(1)
+
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(("", PORT))
 
