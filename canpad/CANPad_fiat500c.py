@@ -141,7 +141,7 @@ if __name__ in "__main__":
     try:
         bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
     except OSError:
-        print("Unable to connect ot the interface %s" % INTERFACE)
+        print("Unable to connect ot the interface {0}".format(INTERFACE))
         exit(1)
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
