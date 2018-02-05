@@ -2,6 +2,7 @@
 
 import can
 import datetime
+import os
 import threading
 import time
 
@@ -11,8 +12,13 @@ Script used to record the way I was driving, to create a test suite for
 another project I'm working on
 '''
 
-diagnostic_id = 0x7df      # Classic 11bits CAN ID
+diagnostic_id = 0x7df
 INTERFACE='vcan0'
+KILLFILE='/tmp/canstop'
+
+global KILLSWITCH
+KILLSWITCH=False
+
 rpm = 0
 speed = 0
 accelerator = 0
@@ -51,7 +57,7 @@ def can_xchg(bus, arb_id, data, ext=False):
     return answer
 
 def get_rpm(bus):
-    while True:
+    while not KILLSWITCH:
         try:
             answer = can_xchg(bus, diagnostic_id, [2, 1, 0xc, 0, 0, 0, 0, 0])
             if answer is None:
@@ -63,22 +69,24 @@ def get_rpm(bus):
             pass
 
 def get_speed(bus):
-    while True:
+    while not KILLSWITCH:
         try:
             answer = can_xchg(bus, diagnostic_id, [2, 1, 0xd, 0, 0, 0, 0, 0])
             if answer is None:
                 return
+
             global speed
             speed = answer.data[3]
         except:
             pass
 
 def get_accel_pos(bus):
-    while True:
+    while not KILLSWITCH:
         try:
             answer = can_xchg(bus, diagnostic_id, [2, 1, 0x49, 0, 0, 0, 0, 0])
             if answer is None:
                 return
+
             global accelerator
             accelerator = answer.data[3]
         except:
@@ -101,4 +109,10 @@ if "__main__" in __name__:
         f.write("{0} - {1} - {2} - {3}\n".format(delta, rpm, speed, accelerator))
         print("{0} - {1} - {2} - {3}".format(delta, rpm, speed, accelerator))
         time.sleep(0.1)
+
+        if os.path.isfile(KILLFILE):
+            global KILLSWITCH
+            KILLSWITCH=True
+            f.close()
+            break
 
