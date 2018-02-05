@@ -1,7 +1,7 @@
 #!/bin/sh
 
 INTERFACE=vcan0
-ID=18DB33F1
+ID=7E8
 
 while true; do
 	cansend $INTERFACE $ID#02410540     	   # Coolant
