@@ -13,7 +13,7 @@ another project I'm working on
 '''
 
 diagnostic_id = 0x7df
-INTERFACE='vcan0'
+INTERFACE='can0'
 KILLFILE='/tmp/canstop'
 
 global KILLSWITCH
@@ -37,13 +37,14 @@ def _is_answer(answer, data):
         # REQUEST PID
         return False
 
+
     return True
 
 def can_xchg(bus, arb_id, data, ext=False):
     '''
     Noise proof
     '''
-    msg = can.Message(arbitration_id=arb_id, data=data)
+    msg = can.Message(arbitration_id=arb_id, data=data, extended_id=False)
 
     answer = None
     bus.send(msg)
@@ -51,46 +52,50 @@ def can_xchg(bus, arb_id, data, ext=False):
     while not answer or not _is_answer(answer, data):
         try:
             answer = bus.recv()
-        except:
+        except Exception as e:
+            print(e)
+            answer = None
+            time.sleep(0.01)
+            bus.send(msg)
             pass
 
     return answer
 
 def get_rpm(bus):
-    while not KILLSWITCH:
-        try:
-            answer = can_xchg(bus, diagnostic_id, [2, 1, 0xc, 0, 0, 0, 0, 0])
-            if answer is None:
-                return
+    try:
+        answer = can_xchg(bus, diagnostic_id, [2, 1, 0xc, 0, 0, 0, 0, 0])
+        if answer is None:
+            return
 
-            global rpm
-            rpm = (answer.data[3] << 8) + answer.data[4]
-        except:
-            pass
+        global rpm
+        rpm = int(((answer.data[3] * 256) + answer.data[4])/4)
+    except Exception as e:
+        print(e)
+        pass
 
 def get_speed(bus):
-    while not KILLSWITCH:
-        try:
-            answer = can_xchg(bus, diagnostic_id, [2, 1, 0xd, 0, 0, 0, 0, 0])
-            if answer is None:
-                return
+    try:
+        answer = can_xchg(bus, diagnostic_id, [2, 1, 0xd, 0, 0, 0, 0, 0])
+        if answer is None:
+            return
 
-            global speed
-            speed = answer.data[3]
-        except:
-            pass
+        global speed
+        speed = answer.data[3]
+    except Exception as e:
+        print(e)
+        pass
 
 def get_accel_pos(bus):
-    while not KILLSWITCH:
-        try:
-            answer = can_xchg(bus, diagnostic_id, [2, 1, 0x49, 0, 0, 0, 0, 0])
-            if answer is None:
-                return
+    try:
+        answer = can_xchg(bus, diagnostic_id, [2, 1, 0x49, 0, 0, 0, 0, 0])
+        if answer is None:
+            return
 
-            global accelerator
-            accelerator = answer.data[3]
-        except:
-            pass
+        global accelerator
+        accelerator = answer.data[3]
+    except Exception as e:
+        print(e)
+        pass
 
 if "__main__" in __name__:
     speed_bus = can.interface.Bus(channel=INTERFACE, bustype='socketcan_native')
@@ -100,19 +105,12 @@ if "__main__" in __name__:
     begin = datetime.datetime.now()
     f = open("can.{0}.logs".format(str(begin).replace(" ", "_")), "w+", buffering=1)
 
-    threading.Timer(0, get_speed, [speed_bus]).start()
-    threading.Timer(0, get_rpm, [rpm_bus]).start()
-    threading.Timer(0, get_accel_pos, [accelerator_bus]).start()
-
     while True:
+        get_speed(speed_bus)
+        get_rpm(rpm_bus)
+        get_accel_pos(accelerator_bus)
         delta = datetime.datetime.now() - begin
         f.write("{0} - {1} - {2} - {3}\n".format(delta, rpm, speed, accelerator))
         print("{0} - {1} - {2} - {3}".format(delta, rpm, speed, accelerator))
-        time.sleep(0.1)
-
-        if os.path.isfile(KILLFILE):
-            global KILLSWITCH
-            KILLSWITCH=True
-            f.close()
-            break
+        time.sleep(0.05)
 
