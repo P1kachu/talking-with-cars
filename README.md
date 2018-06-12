@@ -62,7 +62,5 @@ For any question, feel free to send me an email at p1kachu@lse.epita.fr
 - http://nefariousmotorsports.com/forum/
 - http://nefariousmotorsports.com/forum/index.php?topic=4983
 - http://www.ti.com/lit/an/sloa101b/sloa101b.pdf
-- http://forum.canb.us:4567/topic/9/vag-can-hacking/9
-
 - See 'notes' for more
 

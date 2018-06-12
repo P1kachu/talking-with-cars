@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import can
+import time
 
 INTERFACE="can0"
 
@@ -141,6 +142,7 @@ def can_xchg_advanced(bus, arb_id, data, ext=False):
             answer = bus.recv(0.05)
         except:
             pass
+        break
 
     return answer
 
@@ -174,6 +176,82 @@ def is_handbrake_set(bus):
 
     return answer.data[4] & 1
 
-# UDS session
-can_xchg_advanced(bus, 0x18DA30f1, [0x2, 0x10, 0x03, 0, 0, 0, 0, 0], True)
-is_handbrake_set(bus)
+# Mazda Demio UDS session
+#can_xchg_advanced(bus, 0x7df, [0x2, 0x10, 0x01, 0, 0, 0, 0, 0], False)
+"""
+can0  TX - -  7DF   [8]  02 10 01 00 00 00 00 00   '........'
+can0  RX - -  7E9   [8]  06 50 01 00 32 01 F4 00   '.P..2...'
+"""
+
+# Nissan Leaf UDS session
+#for i in range(0x600, 0x800):
+#    print(hex(i))
+#    can_xchg_advanced(bus, i, [0x2, 0x10, 0x01, 0, 0, 0, 0, 0], False)
+#    time.sleep(0.1)
+
+# BMW 530d UDS session
+for i in range(0x600, 0x800):
+    print(hex(i))
+    can_xchg_advanced(bus, i, [0x2, 0x10, 0x01, 0, 0, 0, 0, 0], False)
+    time.sleep(0.1)
+"""
+2117-  can0  03C   [8]  20 A8 02 12 01 00 2A FF
+2118-  can0  130   [5]  F7 FF FF FF FF
+2119-  can0  7DE   [8]  02 10 01 00 00 00 00 00
+2120-  can0  03C   [8]  7D A9 02 12 01 00 2A FF
+2121-  can0  130   [5]  F7 FF FF FF FF
+2122-  can0  7DF   [8]  02 10 01 00 00 00 00 00
+2123:  can0  7EC   [8]  06 50 01 00 32 01 F4 55
+2124-  can0  7E9   [8]  03 7F 10 22 AA AA AA AA
+2125:  can0  7EF   [8]  06 50 01 00 32 01 F4 FF
+2126-  can0  03C   [8]  9A AA 02 12 01 00 2A FF
+2127-  can0  130   [5]  F7 FF FF FF FF
+2128-  can0  7E0   [8]  02 10 01 00 00 00 00 00
+2129-  can0  03C   [8]  C7 AB 02 12 01 00 2A FF
+2130-  can0  130   [5]  F7 FF FF FF FF
+2131-  can0  7E1   [8]  02 10 01 00 00 00 00 00
+2132-  can0  7C1   [8]  0E 1A 00 0C FF 00 01 00
+2133:  can0  7E9   [8]  06 50 01 00 32 01 F4 AA
+2134-  can0  799   [7]  1D 01 17 04 0F 02 0A
+2135-  can0  03C   [8]  49 AC 02 12 01 00 2A FF
+2136-  can0  130   [5]  F7 FF FF FF FF
+2137-  can0  7E2   [8]  02 10 01 00 00 00 00 00
+2138-  can0  03C   [8]  14 AD 02 12 01 00 2A FF
+2139-  can0  130   [5]  F7 FF FF FF FF
+2140-  can0  7E3   [8]  02 10 01 00 00 00 00 00
+2141-  can0  03C   [8]  F3 AE 02 12 01 00 2A FF
+2142-  can0  130   [5]  F7 FF FF FF FF
+2143-  can0  7E4   [8]  02 10 01 00 00 00 00 00
+2144:  can0  7EC   [8]  06 50 01 00 32 01 F4 55
+2145-  can0  03C   [8]  F2 A0 02 12 01 00 2A FF
+2146-  can0  130   [5]  F7 FF FF FF FF
+2147-  can0  7E5   [8]  02 10 01 00 00 00 00 00
+2148-  can0  03C   [8]  AF A1 02 12 01 00 2A FF
+2149-  can0  130   [5]  F7 FF FF FF FF
+2150-  can0  7E6   [8]  02 10 01 00 00 00 00 00
+2151-  can0  799   [7]  1F 01 17 04 0D 03 0A
+2152-  can0  03C   [8]  48 A2 02 12 01 00 2A FF
+2153-  can0  130   [5]  F7 FF FF FF FF
+2154-  can0  7E7   [8]  02 10 01 00 00 00 00 00
+2155:  can0  7EF   [8]  06 50 01 00 32 01 F4 FF
+2156-  can0  03C   [8]  15 A3 02 12 01 00 2A FF
+2157-  can0  130   [5]  F7 FF FF FF FF
+2158-  can0  7E8   [8]  02 10 01 00 00 00 00 00
+2159-  can0  03C   [8]  9B A4 02 12 01 00 2A FF
+2160-  can0  130   [5]  F7 FF FF FF FF
+2161-  can0  7E9   [8]  02 10 01 00 00 00 00 00
+--
+2183-  can0  130   [5]  F7 FF FF FF FF
+2184-  can0  7F0   [8]  02 10 01 00 00 00 00 00
+2185-  can0  799   [7]  1F 01 16 04 0C 03 0A
+2186-  can0  03C   [8]  49 AC 02 12 01 00 2A FF
+2187-  can0  130   [5]  F7 FF FF FF FF
+2188-  can0  7F1   [8]  02 10 01 00 00 00 00 00
+2189:  can0  7F9   [8]  06 50 01 00 32 01 F4 00
+2190-  can0  03C   [8]  14 AD 02 12 01 00 2A FF
+2191-  can0  130   [5]  F7 FF FF FF FF
+2192-  can0  7F2   [8]  02 10 01 00 00 00 00 00
+2193-  can0  03C   [8]  F3 AE 02 12 01 00 2A FF
+2194-  can0  130   [5]  F7 FF FF FF FF
+2195-  can0  7F3   [8]  02 10 01 00 00 00 00 00
+"""
